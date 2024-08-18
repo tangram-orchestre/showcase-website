@@ -1,0 +1,6 @@
+Dockerfile
+node_modules
+.nuxt
+.output
+.vscode
+.github
