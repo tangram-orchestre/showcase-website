@@ -1,20 +1,15 @@
-<script setup lang="ts">
-const route = useRoute();
-</script>
-
 <template>
   <Head>
     <Title>Tangram Orchestre</Title>
   </Head>
 
   <div>
-    <h1>Nuxt Routing set up successfully!</h1>
-    <p>Current route: {{ route.path }}</p>
-    <a
-      href="https://nuxt.com/docs/getting-started/routing"
-      target="_blank"
-    >Learn more about Nuxt Routing</a>
-
-    <BaseCounter />
+    <h1>Tangram - Site en construction</h1>
+    <h2>Orchestre amateur</h2>
+    <p>
+      Cette association a pour but de réunir des instrumentistes en vue de répétitions, concerts et ateliers, et de
+      permettre à ces musicien·ne·s de découvrir et/ou de pratiquer la direction (possibilité de diriger et
+      d'assister à des ateliers)
+    </p>
   </div>
 </template>
