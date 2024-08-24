@@ -1,23 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import svgLoader from "vite-svg-loader";
+
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   typescript: { typeCheck: true },
-  modules: ['@nuxt/eslint'],
-  css: ['~/assets/css/main.css'],
+  modules: ["@nuxt/eslint", "@vueuse/nuxt"],
+  css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
-  eslint: {
-    config: {
-      stylistic: {
-        indent: 2,
-        semi: true,
-        quotes: 'single',
-      },
-    },
+  vite: {
+    plugins: [svgLoader()],
   },
 });

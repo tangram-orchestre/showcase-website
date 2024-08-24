@@ -8,22 +8,32 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "lint:eslint": "eslint .",
+    "lint:prettier": "prettier . --check",
+    "lint:fix": "eslint . --fix && prettier --write --list-different ."
   },
   "dependencies": {
-    "@nuxt/eslint": "^0.5.0",
+    "@vueuse/core": "^11.0.3",
+    "@vueuse/nuxt": "^11.0.3",
     "nuxt": "^3.12.4",
     "vue": "latest"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "devDependencies": {
+    "@nuxt/eslint": "^0.5.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "postcss": "^8.4.41",
+    "prettier": "^3.3.3",
+    "sass": "^1.77.8",
+    "sass-loader": "^16.0.1",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4",
+    "vite-svg-loader": "^5.1.0",
     "vue-tsc": "^2.0.29"
   }
 }
