@@ -2,39 +2,14 @@
 import Logo from "~/assets/logo.svg";
 
 const toggle = ref(true);
-const logo = ref(null);
-const inner = ref(null);
-
-const svgBounds = useElementBounding(logo);
-const innerBounds = useElementBounding(inner);
-
-const loading = computed(() => {
-  return innerBounds.right.value == 0;
-});
-const xOffset = computed(() => {
-  return (
-    (innerBounds.right.value - svgBounds.right.value) *
-    (500 / svgBounds.width.value)
-  );
-});
-const yOffset = computed(() => {
-  return (
-    (innerBounds.bottom.value - svgBounds.bottom.value) *
-    (500 / svgBounds.height.value)
-  );
-});
 </script>
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
-  <div class="outer flex h-96 w-full items-center justify-center">
-    <div
-      ref="inner"
-      class="flex size-full items-center justify-center lg:w-2/3"
-    >
+  <div class="outer flex w-full items-center justify-center">
+    <div class="flex size-full items-center justify-center bg-lime-300">
       <Logo
-        ref="logo"
-        :class="{ 'shape-logo': toggle, loading }"
+        :class="{ 'shape-logo': toggle }"
         class="tangram overflow-visible"
       />
     </div>
@@ -42,12 +17,15 @@ const yOffset = computed(() => {
 </template>
 
 <style scoped lang="scss">
-$opacity_transition_time: 0.7;
+$opacity_transition_time: 0.5;
+
+.outer {
+  height: 40vh;
+}
 
 .tangram {
-  max-width: 50%;
-  max-height: 50%;
-  aspect-ratio: 1 / 1;
+  max-width: 54%;
+  max-height: 66%;
   opacity: 1;
   transition: opacity $opacity_transition_time * 1s;
 }
@@ -85,10 +63,11 @@ $opacity_transition_time: 0.7;
   }
 
   @mixin kf($name, $transform, $timeOffset) {
-    $offset: translate(
-      calc(v-bind(xOffset) * 1px),
-      calc(v-bind(yOffset) * 1px)
-    );
+    // $offset: translate(
+    //   calc(v-bind(xOffset) * 1px),
+    //   calc(v-bind(yOffset) * 1px)
+    // );
+    $offset: translate(0, 35vh);
 
     .#{$name} {
       transform: $offset;
@@ -99,7 +78,7 @@ $opacity_transition_time: 0.7;
       $perspective: scale(1.2);
 
       .#{$name} {
-        animation: #{$name}-animation 0.7s ease-in-out forwards;
+        animation: #{$name}-animation 0.6s ease-in-out forwards;
         animation-delay: $timeOffset;
       }
 
@@ -127,7 +106,7 @@ $opacity_transition_time: 0.7;
     $time_offset: $opacity_transition_time;
     @each $name, $t in $list {
       @include kf($name, $t, $time_offset + s);
-      $time_offset: $time_offset + 0.2;
+      $time_offset: $time_offset + 0.1;
     }
   }
 
@@ -136,10 +115,10 @@ $opacity_transition_time: 0.7;
       big-triangle-2: translate(-70px, -240px) rotate(90deg),
       small-triangle-2: translate(-70px, -240px) rotate(00deg),
       big-triangle-1: translate(35px, 235px) rotate(-135deg),
-      square: translate(35px, -192px) rotate(-45deg),
+      small-triangle-1: translate(263px, -45px),
       medium-triangle: translate(138px, -347px) rotate(45deg),
       parallelogram: translate(13px, 80px) rotateY(180deg),
-      small-triangle-1: translate(263px, -45px),
+      square: translate(35px, -192px) rotate(-45deg),
     )
   );
 }
