@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import Logo from "~/assets/logo.svg";
-
-const toggle = ref(true);
+const toggle = ref(false);
 </script>
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
-  <div class="outer flex w-full items-center justify-center">
-    <div class="flex size-full items-center justify-center bg-lime-300">
-      <Logo
-        :class="{ 'shape-logo': toggle }"
-        class="tangram overflow-visible"
-      />
+  <button @click="toggle = !toggle">Toggle</button>
+  <div class="outer flex w-full items-center justify-center bg-orange-300">
+    <div class="inner flex items-center justify-center bg-lime-200">
+      <div :class="{ 'shape-logo': toggle }" class="tangram overflow-visible">
+        <div class="big-triangle-1" />
+        <div class="square" />
+        <div class="big-triangle-2" />
+        <div class="small-triangle-2" />
+        <div class="parallelogram" />
+        <div class="medium-triangle" />
+        <div class="small-triangle-1" />
+      </div>
     </div>
   </div>
 </template>
@@ -20,106 +24,121 @@ const toggle = ref(true);
 $opacity_transition_time: 0.5;
 
 .outer {
-  height: 40vh;
+  height: 70vh;
+}
+
+.inner {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  aspect-ratio: 1.2 / 1;
+  opacity: 1;
 }
 
 .tangram {
+  position: relative;
   max-width: 54%;
-  max-height: 66%;
+  max-height: 54%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  transform-style: preserve-3d;
   opacity: 1;
-  transition: opacity $opacity_transition_time * 1s;
 }
 
-.tangram.loading {
-  opacity: 0;
+.tangram div {
+  position: absolute;
+  transform-box: fill-box;
+
+  width: 100%;
+  height: 100%;
 }
 
-:deep() {
-  .tangram * {
-    transform-box: fill-box;
-    transform-origin: center;
-  }
+// TODO: transform origins, correct displacement
+.big-triangle-1 {
+  background-color: #6d9f02;
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
+  transform-origin: 50% 25%;
+}
+.square {
+  background-color: #81ccb5;
+  clip-path: polygon(50% 50%, 75% 75%, 50% 100%, 25% 75%);
+}
+.big-triangle-2 {
+  background-color: #ffc303;
+  clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+}
+.small-triangle-2 {
+  clip-path: polygon(75% 75%, 100% 100%, 50% 100%);
+  background-color: #fe9225;
+}
+.parallelogram {
+  background-color: #ff5b62;
+  clip-path: polygon(0 0, 25% 25%, 25% 75%, 0 50%);
+}
+.medium-triangle {
+  background-color: #ffc3cb;
+  clip-path: polygon(0 50%, 50% 100%, 0 100%);
+}
+.small-triangle-1 {
+  background-color: #ff81ac;
+  clip-path: polygon(25% 25%, 50% 50%, 25% 75%);
+}
 
-  .big-triangle-1 {
-    fill: #6d9f02;
+@mixin anim($list) {
+  $time_offset: $opacity_transition_time;
+  @each $name, $t in $list {
+    @include kf($name, $t, $time_offset + s);
+    $time_offset: $time_offset + 2;
   }
-  .square {
-    fill: #81ccb5;
-  }
-  .big-triangle-2 {
-    fill: #ffc303;
-  }
-  .small-triangle-2 {
-    fill: #fe9225;
-  }
-  .parallelogram {
-    fill: #ff5b62;
-  }
-  .medium-triangle {
-    fill: #ffc3cb;
-  }
-  .small-triangle-1 {
-    fill: #ff81ac;
-  }
+}
 
-  @mixin kf($name, $transform, $timeOffset) {
-    // $offset: translate(
-    //   calc(v-bind(xOffset) * 1px),
-    //   calc(v-bind(yOffset) * 1px)
-    // );
-    $offset: translate(0, 35vh);
+@mixin kf($name, $transform, $timeOffset) {
+  $offset: translate(0, 0);
+  $animation-length: 2s;
+  $animation-delta: 0.1;
+
+  // .#{$name} {
+  //   transform: $offset;
+  // }
+
+  .shape-logo {
+    $shadow: drop-shadow(10px 10px 30px rgba(0, 0, 0, 0.3));
+    $perspective: translateZ(100px) scale(1.2);
 
     .#{$name} {
-      transform: $offset;
+      animation: #{$name}-animation $animation-length ease-in-out forwards;
+      animation-delay: $timeOffset;
     }
 
-    .shape-logo {
-      $shadow: drop-shadow(10px 10px 30px rgba(0, 0, 0, 0.3));
-      $perspective: scale(1.2);
-
-      .#{$name} {
-        animation: #{$name}-animation 0.6s ease-in-out forwards;
-        animation-delay: $timeOffset;
+    @keyframes #{$name}-animation {
+      from {
+        transform: $offset;
+      }
+      30% {
+        transform: $offset $perspective;
+        filter: $shadow;
+      }
+      80% {
+        transform: $transform $perspective;
+        filter: $shadow;
       }
 
-      @keyframes #{$name}-animation {
-        from {
-          transform: $offset;
-        }
-        30% {
-          transform: $offset $perspective;
-          filter: $shadow;
-        }
-        80% {
-          transform: $transform $perspective;
-          filter: $shadow;
-        }
-
-        to {
-          transform: $transform;
-        }
+      to {
+        transform: $transform;
       }
     }
   }
-
-  @mixin anim($list) {
-    $time_offset: $opacity_transition_time;
-    @each $name, $t in $list {
-      @include kf($name, $t, $time_offset + s);
-      $time_offset: $time_offset + 0.1;
-    }
-  }
-
-  @include anim(
-    (
-      big-triangle-2: translate(-70px, -240px) rotate(90deg),
-      small-triangle-2: translate(-70px, -240px) rotate(00deg),
-      big-triangle-1: translate(35px, 235px) rotate(-135deg),
-      small-triangle-1: translate(263px, -45px),
-      medium-triangle: translate(138px, -347px) rotate(45deg),
-      parallelogram: translate(13px, 80px) rotateY(180deg),
-      square: translate(35px, -192px) rotate(-45deg),
-    )
-  );
 }
+
+@include anim(
+  (
+    big-triangle-2: translate(10%, 10%),
+    small-triangle-2: translate(10%, 10%),
+    big-triangle-1: translate(10%, 10%),
+    small-triangle-1: translate(10%, 10%),
+    medium-triangle: translate(10%, 10%),
+    parallelogram: translate(10%, 10%),
+    square: translate(10%, 10%),
+  )
+);
 </style>
