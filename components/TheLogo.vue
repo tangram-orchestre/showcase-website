@@ -1,36 +1,28 @@
 <script setup lang="ts">
-const toggle = ref(false);
+const toggle = ref(true);
 </script>
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
-  <button @click="toggle = !toggle">Toggle</button>
-  <div class="outer flex w-full items-center justify-center bg-orange-300">
-    <div class="inner flex items-center justify-center bg-lime-200">
+  <div>
+    <div class="inner flex items-center justify-center">
       <div :class="{ 'shape-logo': toggle }" class="tangram overflow-visible">
-        <div class="big-triangle-1" />
-        <div class="square" />
-        <div class="big-triangle-2" />
-        <div class="small-triangle-2" />
-        <div class="parallelogram" />
-        <div class="medium-triangle" />
-        <div class="small-triangle-1" />
+        <div class="big-triangle-1"><div /></div>
+        <div class="square"><div /></div>
+        <div class="big-triangle-2"><div /></div>
+        <div class="small-triangle-2"><div /></div>
+        <div class="parallelogram"><div /></div>
+        <div class="medium-triangle"><div /></div>
+        <div class="small-triangle-1"><div /></div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-$opacity_transition_time: 0.5;
-
-.outer {
-  height: 70vh;
-}
-
 .inner {
-  max-width: 100%;
-  max-height: 100%;
   width: 100%;
+  max-height: 100vh;
   aspect-ratio: 1.2 / 1;
   opacity: 1;
 }
@@ -38,76 +30,104 @@ $opacity_transition_time: 0.5;
 .tangram {
   position: relative;
   max-width: 54%;
-  max-height: 54%;
+  max-height: 65%;
   height: 100%;
   aspect-ratio: 1 / 1;
   transform-style: preserve-3d;
   opacity: 1;
 }
 
-.tangram div {
+.tangram > div {
   position: absolute;
-  transform-box: fill-box;
+  transform-style: preserve-3d;
 
   width: 100%;
   height: 100%;
 }
 
-// TODO: transform origins, correct displacement
-.big-triangle-1 {
-  background-color: #6d9f02;
-  clip-path: polygon(0 0, 100% 0, 50% 50%);
-  transform-origin: 50% 25%;
-}
-.square {
-  background-color: #81ccb5;
-  clip-path: polygon(50% 50%, 75% 75%, 50% 100%, 25% 75%);
-}
-.big-triangle-2 {
-  background-color: #ffc303;
-  clip-path: polygon(100% 0, 100% 100%, 50% 50%);
-}
-.small-triangle-2 {
-  clip-path: polygon(75% 75%, 100% 100%, 50% 100%);
-  background-color: #fe9225;
-}
-.parallelogram {
-  background-color: #ff5b62;
-  clip-path: polygon(0 0, 25% 25%, 25% 75%, 0 50%);
-}
-.medium-triangle {
-  background-color: #ffc3cb;
-  clip-path: polygon(0 50%, 50% 100%, 0 100%);
-}
-.small-triangle-1 {
-  background-color: #ff81ac;
-  clip-path: polygon(25% 25%, 50% 50%, 25% 75%);
+.tangram > div > div {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
 }
 
-@mixin anim($list) {
-  $time_offset: $opacity_transition_time;
-  @each $name, $t in $list {
-    @include kf($name, $t, $time_offset + s);
-    $time_offset: $time_offset + 2;
+.big-triangle-1 {
+  & > div {
+    background-color: #6d9f02;
+    clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+  }
+  &,
+  > div {
+    transform-origin: 50% 75%;
+  }
+}
+.square {
+  & > div {
+    background-color: #81ccb5;
+    clip-path: polygon(50% 50%, 25% 25%, 50% 0%, 75% 25%);
+    transform-origin: 50% 25%;
+  }
+}
+.big-triangle-2 {
+  & > div {
+    background-color: #ffc303;
+    clip-path: polygon(0 0, 0 100%, 50% 50%);
+    transform-origin: 25% 50%;
+  }
+}
+.small-triangle-2 {
+  & > div {
+    background-color: #ff81ac;
+    clip-path: polygon(0 0, 50% 0%, 25% 25%);
+    transform-origin: 25% 12.5%;
+  }
+}
+.parallelogram {
+  & > div {
+    background-color: #ff5b62;
+    clip-path: polygon(100% 100%, 75% 75%, 75% 25%, 100% 50%);
+    transform-origin: 87.5% 62.5%;
+  }
+}
+.medium-triangle {
+  & > div {
+    background-color: #ffc3cb;
+    clip-path: polygon(50% 0, 100% 0, 100% 50%);
+    transform-origin: 87.5% 12.5%;
+  }
+}
+.small-triangle-1 {
+  & > div {
+    background-color: #fe9225;
+    clip-path: polygon(75% 25%, 50% 50%, 75% 75%);
+    transform-origin: 62.5% 50%;
   }
 }
 
-@mixin kf($name, $transform, $timeOffset) {
-  $offset: translate(0, 0);
-  $animation-length: 2s;
-  $animation-delta: 0.1;
+@mixin anim($list) {
+  $time_offset: 0;
+  @each $name, $t in $list {
+    @include kf($name, $t, $time_offset);
+    $time_offset: $time_offset + 0.3;
+  }
+}
 
-  // .#{$name} {
-  //   transform: $offset;
-  // }
+@mixin kf($name, $transform, $time-offset) {
+  $offset: translate(0, 42%);
+  $animation-length: 0.6s;
+
+  .#{$name} > div {
+    transform: $offset;
+  }
 
   .shape-logo {
-    $shadow: drop-shadow(10px 10px 30px rgba(0, 0, 0, 0.3));
-    $perspective: translateZ(100px) scale(1.2);
+    $shadow: drop-shadow(0 0 3em rgba(0, 0, 0, 0.3));
+    $perspective: translateZ(100px + $time-offset) scale(1.1);
 
-    .#{$name} {
+    .#{$name} > div {
       animation: #{$name}-animation $animation-length ease-in-out forwards;
-      animation-delay: $timeOffset;
+      animation-delay: $time-offset + s;
     }
 
     @keyframes #{$name}-animation {
@@ -116,15 +136,28 @@ $opacity_transition_time: 0.5;
       }
       30% {
         transform: $offset $perspective;
-        filter: $shadow;
       }
       80% {
         transform: $transform $perspective;
-        filter: $shadow;
       }
-
       to {
         transform: $transform;
+      }
+    }
+
+    .#{$name} {
+      animation: #{$name}-animation-filter $animation-length ease-in-out forwards;
+      animation-delay: $time-offset + s;
+    }
+
+    @keyframes #{$name}-animation-filter {
+      30% {
+        filter: $shadow;
+        transform: translateZ(100px + $time-offset);
+      }
+      80% {
+        filter: $shadow;
+        transform: translateZ(100px + $time-offset);
       }
     }
   }
@@ -132,13 +165,13 @@ $opacity_transition_time: 0.5;
 
 @include anim(
   (
-    big-triangle-2: translate(10%, 10%),
-    small-triangle-2: translate(10%, 10%),
-    big-triangle-1: translate(10%, 10%),
-    small-triangle-1: translate(10%, 10%),
-    medium-triangle: translate(10%, 10%),
-    parallelogram: translate(10%, 10%),
-    square: translate(10%, 10%),
+    big-triangle-2: translate(-15%, -50%) rotate(90deg),
+    medium-triangle: translate(13.5%, 5%) rotate(90deg + 45deg),
+    small-triangle-2: translate(88.5%, 22.5%) rotate(90deg),
+    small-triangle-1: translate(-52.5%, -12.5%) rotate(90deg),
+    square: translate(5%, 10%) rotate(45deg),
+    parallelogram: translate(1%, -15%),
+    big-triangle-1: translate(5%, -4.6%) rotate(45deg),
   )
 );
 </style>
