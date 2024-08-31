@@ -4,17 +4,15 @@ const toggle = ref(true);
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
-  <div>
-    <div class="inner flex items-center justify-center">
-      <div :class="{ 'shape-logo': toggle }" class="tangram overflow-visible">
-        <div class="big-triangle-1"><div /></div>
-        <div class="square"><div /></div>
-        <div class="big-triangle-2"><div /></div>
-        <div class="small-triangle-2"><div /></div>
-        <div class="parallelogram"><div /></div>
-        <div class="medium-triangle"><div /></div>
-        <div class="small-triangle-1"><div /></div>
-      </div>
+  <div class="inner mx-auto flex items-center justify-center">
+    <div :class="{ 'shape-logo': toggle }" class="tangram overflow-visible">
+      <div class="big-triangle-1"><div /></div>
+      <div class="square"><div /></div>
+      <div class="big-triangle-2"><div /></div>
+      <div class="small-triangle-2"><div /></div>
+      <div class="parallelogram"><div /></div>
+      <div class="medium-triangle"><div /></div>
+      <div class="small-triangle-1"><div /></div>
     </div>
   </div>
 </template>
@@ -22,9 +20,8 @@ const toggle = ref(true);
 <style scoped lang="scss">
 .inner {
   width: 100%;
-  max-height: 100vh;
   aspect-ratio: 1.2 / 1;
-  opacity: 1;
+  max-height: 100%;
 }
 
 .tangram {
@@ -34,7 +31,7 @@ const toggle = ref(true);
   height: 100%;
   aspect-ratio: 1 / 1;
   transform-style: preserve-3d;
-  opacity: 1;
+  filter: drop-shadow(0 0 0.2em rgba(0, 0, 0, 0.3));
 }
 
 .tangram > div {
@@ -56,9 +53,6 @@ const toggle = ref(true);
   & > div {
     background-color: #6d9f02;
     clip-path: polygon(0 100%, 100% 100%, 50% 50%);
-  }
-  &,
-  > div {
     transform-origin: 50% 75%;
   }
 }
@@ -109,20 +103,20 @@ const toggle = ref(true);
   $time_offset: 0;
   @each $name, $t in $list {
     @include kf($name, $t, $time_offset);
-    $time_offset: $time_offset + 0.3;
+    $time_offset: $time_offset + 0.15;
   }
 }
 
 @mixin kf($name, $transform, $time-offset) {
   $offset: translate(0, 42%);
-  $animation-length: 0.6s;
+  $animation-length: 0.8s;
 
   .#{$name} > div {
     transform: $offset;
   }
 
   .shape-logo {
-    $shadow: drop-shadow(0 0 3em rgba(0, 0, 0, 0.3));
+    $shadow: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
     $perspective: translateZ(100px + $time-offset) scale(1.1);
 
     .#{$name} > div {
@@ -165,9 +159,9 @@ const toggle = ref(true);
 
 @include anim(
   (
+    small-triangle-2: translate(88.5%, 22.5%) rotate(90deg),
     big-triangle-2: translate(-15%, -50%) rotate(90deg),
     medium-triangle: translate(13.5%, 5%) rotate(90deg + 45deg),
-    small-triangle-2: translate(88.5%, 22.5%) rotate(90deg),
     small-triangle-1: translate(-52.5%, -12.5%) rotate(90deg),
     square: translate(5%, 10%) rotate(45deg),
     parallelogram: translate(1%, -15%),
