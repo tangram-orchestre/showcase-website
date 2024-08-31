@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "ISOCT";
+  src: url("/fonts/ISOCT.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
