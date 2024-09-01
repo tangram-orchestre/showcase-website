@@ -36,7 +36,7 @@ const entering = ref(true);
         :class="{ 'opacity-0': entering }"
         class="mt-24 transition-all delay-500 duration-1000"
       >
-        <h1 class="wip fixed bottom-36 w-full text-center text-4xl">
+        <h1 class="wip fixed bottom-36 text-center text-4xl">
           &lt;coding-in-progress /&gt;
         </h1>
       </div>
@@ -57,8 +57,11 @@ const entering = ref(true);
   .heading {
     grid-template-columns: 40% 60%;
     max-width: 950px;
-    transition: all ease 1s;
   }
+}
+
+.heading {
+  transition: grid-template-columns ease 1s;
 }
 
 .title {
@@ -84,5 +87,7 @@ const entering = ref(true);
 
 .wip {
   font-family: "Roboto-Light";
+  transform: translate(calc(50vw - 50%));
+  left: 0;
 }
 </style>
