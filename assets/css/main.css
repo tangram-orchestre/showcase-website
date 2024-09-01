@@ -3,8 +3,24 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "ISOCT";
-  src: url("/fonts/ISOCT.ttf");
+  font-family: "Roboto-Thin";
+  src: url("/fonts/Roboto-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto-Light";
+  src: url("/fonts/Roboto-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("/fonts/Oswald.ttf");
   font-weight: normal;
   font-style: normal;
   font-display: swap;

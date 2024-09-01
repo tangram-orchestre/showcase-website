@@ -1,5 +1,18 @@
 <script setup lang="ts">
+import { useEventListener } from "@vueuse/core";
+
 const toggle = ref(true);
+
+const emit = defineEmits(["animation-end"]);
+
+useEventListener(document, "animationend", (event) => {
+  if (
+    event?.target instanceof Element &&
+    event.target.className == "parallelogram"
+  ) {
+    emit("animation-end");
+  }
+});
 </script>
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
