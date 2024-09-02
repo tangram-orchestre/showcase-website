@@ -17,7 +17,7 @@ const entering = ref(true);
 
     <div class="container mx-auto">
       <div
-        class="heading mx-auto mt-32 grid max-w-4xl justify-items-center"
+        class="heading mx-auto mt-32 grid max-w-4xl justify-items-center transition-[grid-template-columns] duration-1000 ease-in-out"
         :class="{ entering }"
       >
         <div class="logo">
@@ -27,11 +27,15 @@ const entering = ref(true);
           class="flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-all duration-1000 lg:pt-0"
           :class="{ 'opacity-0': entering }"
         >
-          <div class="title font-['Roboto-Thin'] leading-[1.067em]">
+          <div
+            class="title font-['Roboto-Thin'] text-[calc(clamp(1px,15vw,6rem))] leading-[1.067em]"
+          >
             TANGRAM
           </div>
-          <div class="sub-title font-['Oswald'] tracking-widest">
-            Orchestre Amateur
+          <div
+            class="sub-title text-center font-['Oswald'] text-[calc(clamp(1px,3vw,1.3rem))] tracking-wide"
+          >
+            Orchestre amateur pour Chef⸱fe⸱s en herbe
           </div>
         </div>
       </div>
@@ -40,7 +44,9 @@ const entering = ref(true);
         :class="{ 'opacity-0': entering }"
         class="mt-24 transition-all delay-500 duration-1000"
       >
-        <h1 class="text-center font-['Roboto-Light'] text-4xl">
+        <h1
+          class="text-center font-['Roboto-Light'] text-[clamp(1rem,6vw,2.2rem)]"
+        >
           &lt;coding-in-progress /&gt;
         </h1>
       </div>
@@ -60,24 +66,13 @@ const entering = ref(true);
   }
 }
 
-.heading {
-  transition: grid-template-columns ease 1s;
-}
-
-.title {
-  font-size: calc(clamp(1px, 15vw, 90px));
-}
-.sub-title {
-  font-size: calc(clamp(1px, 4vw, 25px));
-}
-
 .logo {
   min-width: 150px;
   @media (min-width: 300px) {
     height: 180px;
   }
   @media (min-width: 400px) {
-    height: 250px;
+    height: 290px;
   }
 }
 </style>
