@@ -24,7 +24,7 @@ const entering = ref(true);
           <TheLogo class="size-full" @animation-end="entering = false" />
         </div>
         <div
-          class="flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-all duration-1000 lg:pt-0"
+          class="flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-opacity duration-1000 lg:pt-0"
           :class="{ 'opacity-0': entering }"
         >
           <div
@@ -42,7 +42,7 @@ const entering = ref(true);
 
       <div
         :class="{ 'opacity-0': entering }"
-        class="mt-24 transition-all delay-500 duration-1000"
+        class="mt-24 transition-opacity delay-500 duration-1000"
       >
         <h1
           class="text-center font-['Roboto-Light'] text-[clamp(1rem,6vw,2.2rem)]"
