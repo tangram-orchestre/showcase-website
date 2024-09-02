@@ -10,7 +10,7 @@ const entering = ref(true);
 
   <div class="min-h-screen overflow-hidden">
     <div
-      class="navbar fixed top-0 z-30 w-full bg-white p-4 text-center text-3xl text-gray-800 shadow-xl"
+      class="fixed top-0 z-30 w-full bg-white p-4 text-center font-['Roboto-Light'] text-3xl text-gray-800 shadow-xl"
     >
       TANGRAM
     </div>
@@ -27,8 +27,12 @@ const entering = ref(true);
           class="flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-all duration-1000 lg:pt-0"
           :class="{ 'opacity-0': entering }"
         >
-          <div class="title">TANGRAM</div>
-          <div class="sub-title">Orchestre Amateur</div>
+          <div class="title font-['Roboto-Thin'] leading-[1.067em]">
+            TANGRAM
+          </div>
+          <div class="sub-title font-['Oswald'] tracking-widest">
+            Orchestre Amateur
+          </div>
         </div>
       </div>
 
@@ -36,17 +40,15 @@ const entering = ref(true);
         :class="{ 'opacity-0': entering }"
         class="mt-24 transition-all delay-500 duration-1000"
       >
-        <h1 class="wip text-center text-4xl">&lt;coding-in-progress /&gt;</h1>
+        <h1 class="text-center font-['Roboto-Light'] text-4xl">
+          &lt;coding-in-progress /&gt;
+        </h1>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.navbar {
-  font-family: "Roboto-Light";
-}
-
 @media (min-width: 1024px) {
   .heading.entering {
     grid-template-columns: 100% 0;
@@ -64,13 +66,9 @@ const entering = ref(true);
 
 .title {
   font-size: calc(clamp(1px, 15vw, 90px));
-  font-family: "Roboto-Thin";
-  line-height: 100px;
 }
 .sub-title {
   font-size: calc(clamp(1px, 4vw, 25px));
-  font-family: "Oswald";
-  letter-spacing: 0.084em;
 }
 
 .logo {
@@ -81,9 +79,5 @@ const entering = ref(true);
   @media (min-width: 400px) {
     height: 250px;
   }
-}
-
-.wip {
-  font-family: "Roboto-Light";
 }
 </style>
