@@ -36,9 +36,7 @@ const entering = ref(true);
         :class="{ 'opacity-0': entering }"
         class="mt-24 transition-all delay-500 duration-1000"
       >
-        <h1 class="wip fixed bottom-36 text-center text-4xl">
-          &lt;coding-in-progress /&gt;
-        </h1>
+        <h1 class="wip text-center text-4xl">&lt;coding-in-progress /&gt;</h1>
       </div>
     </div>
   </div>
@@ -87,7 +85,5 @@ const entering = ref(true);
 
 .wip {
   font-family: "Roboto-Light";
-  transform: translate(calc(50vw - 50%));
-  left: 0;
 }
 </style>
