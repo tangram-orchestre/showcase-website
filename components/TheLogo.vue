@@ -1,29 +1,7 @@
-<script setup lang="ts">
-const animated = defineModel<boolean>();
-useEventListener(document, "animationend", (event) => {
-  if (
-    event?.target instanceof Element &&
-    event.target.className == "parallelogram"
-  ) {
-    animated.value = true;
-  }
-});
-
-const startAnimation = ref(false);
-// Wait for hydration before starting the animation to ensure we can catch
-// animationend event
-onMounted(() => {
-  startAnimation.value = true;
-});
-</script>
-
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
   <div class="inner mx-auto flex items-center justify-center">
-    <div
-      :class="{ 'shape-logo': startAnimation }"
-      class="tangram overflow-visible"
-    >
+    <div class="tangram shape-logo overflow-visible">
       <div class="big-triangle-1"><div /></div>
       <div class="square"><div /></div>
       <div class="big-triangle-2"><div /></div>

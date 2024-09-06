@@ -1,7 +1,3 @@
-<script setup lang="ts">
-const animated = ref(false);
-</script>
-
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
   <Head>
@@ -17,15 +13,13 @@ const animated = ref(false);
 
     <div class="container mx-auto">
       <div
-        class="heading mx-auto mt-32 grid max-w-4xl justify-items-center transition-[grid-template-columns] duration-1000 ease-in-out"
-        :class="{ entering: !animated }"
+        class="heading mx-auto mt-32 grid max-w-4xl justify-items-center ease-in-out"
       >
         <div class="logo">
-          <TheLogo v-model="animated" class="size-full" />
+          <TheLogo class="size-full" />
         </div>
         <div
-          class="flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-opacity duration-1000 lg:pt-0"
-          :class="{ 'opacity-0': !animated }"
+          class="title-container flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-opacity duration-1000 lg:pt-0"
         >
           <div
             class="title font-['Roboto-Thin'] text-[calc(clamp(1px,15vw,6rem))] leading-[1.067em]"
@@ -40,31 +34,22 @@ const animated = ref(false);
         </div>
       </div>
 
-      <div
-        :class="{ 'opacity-0': !animated }"
-        class="mt-24 transition-opacity delay-500 duration-1000"
-      >
+      <main class="mt-24 transition-opacity delay-500 duration-1000">
         <h1
           class="text-center font-['Roboto-Light'] text-[clamp(1rem,6vw,2.2rem)]"
         >
           &lt;coding-in-progress /&gt;
         </h1>
-      </div>
+      </main>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@media (min-width: 1024px) {
-  .heading.entering {
-    grid-template-columns: 100% 0;
-  }
-
-  .heading {
-    grid-template-columns: 40% 60%;
-    max-width: 950px;
-  }
-}
+$animate-in-title-time: 1000ms;
+$animate-in-title-duration: 1000ms;
+$animate-in-main-time: $animate-in-title-time + 700ms;
+$animate-in-main-duration: 1000ms;
 
 .logo {
   min-width: 150px;
@@ -74,5 +59,44 @@ const animated = ref(false);
   @media (min-width: 400px) {
     height: 290px;
   }
+}
+
+@keyframes grid-animation {
+  from {
+    grid-template-columns: 100% 0;
+  }
+  to {
+    grid-template-columns: 40% 60%;
+  }
+}
+
+@keyframes opacity-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    grid-template-columns: 100% 0;
+    animation: grid-animation $animate-in-title-duration ease-in-out
+      $animate-in-title-time forwards;
+    max-width: 950px;
+  }
+}
+
+.title-container {
+  opacity: 0;
+  animation: opacity-animation $animate-in-title-duration ease-in-out
+    $animate-in-title-time forwards;
+}
+
+main {
+  opacity: 0;
+  animation: opacity-animation $animate-in-main-duration ease-in-out
+    $animate-in-main-time forwards;
 }
 </style>
