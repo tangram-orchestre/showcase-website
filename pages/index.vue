@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const entering = ref(true);
+const animated = ref(false);
 </script>
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
@@ -18,14 +18,14 @@ const entering = ref(true);
     <div class="container mx-auto">
       <div
         class="heading mx-auto mt-32 grid max-w-4xl justify-items-center transition-[grid-template-columns] duration-1000 ease-in-out"
-        :class="{ entering }"
+        :class="{ entering: !animated }"
       >
         <div class="logo">
-          <TheLogo class="size-full" @animation-end="entering = false" />
+          <TheLogo v-model="animated" class="size-full" />
         </div>
         <div
           class="flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-opacity duration-1000 lg:pt-0"
-          :class="{ 'opacity-0': entering }"
+          :class="{ 'opacity-0': !animated }"
         >
           <div
             class="title font-['Roboto-Thin'] text-[calc(clamp(1px,15vw,6rem))] leading-[1.067em]"
@@ -41,7 +41,7 @@ const entering = ref(true);
       </div>
 
       <div
-        :class="{ 'opacity-0': entering }"
+        :class="{ 'opacity-0': !animated }"
         class="mt-24 transition-opacity delay-500 duration-1000"
       >
         <h1
