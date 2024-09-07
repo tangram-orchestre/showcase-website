@@ -1,7 +1,7 @@
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
-  <div class="inner mx-auto flex items-center justify-center">
-    <div class="tangram shape-logo overflow-visible">
+  <div class="outer mx-auto flex items-center justify-center">
+    <div class="inner shape-logo overflow-visible">
       <div class="big-triangle-1"><div /></div>
       <div class="square"><div /></div>
       <div class="big-triangle-2"><div /></div>
@@ -14,23 +14,25 @@
 </template>
 
 <style scoped lang="scss">
-.inner {
+.outer {
   width: 100%;
   aspect-ratio: 1.2 / 1;
   max-height: 100%;
+
+  // Filter disables transform-style so apply on parent
+  filter: drop-shadow(0 0 0.2em rgba(0, 0, 0, 0.3));
 }
 
-.tangram {
+.inner {
   position: relative;
   max-width: 54%;
   max-height: 65%;
   height: 100%;
   aspect-ratio: 1 / 1;
   transform-style: preserve-3d;
-  filter: drop-shadow(0 0 0.2em rgba(0, 0, 0, 0.3));
 }
 
-.tangram > div {
+.inner > div {
   position: absolute;
   transform-style: preserve-3d;
 
@@ -38,7 +40,7 @@
   height: 100%;
 }
 
-.tangram > div > div {
+.inner > div > div {
   position: absolute;
 
   width: 100%;
@@ -143,11 +145,11 @@
     @keyframes #{$name}-animation-filter {
       30% {
         filter: $shadow;
-        transform: translateZ(100px + $time-offset);
+        transform: translateZ(100px - $time-offset);
       }
       80% {
         filter: $shadow;
-        transform: translateZ(100px + $time-offset);
+        transform: translateZ(100px - $time-offset);
       }
     }
   }

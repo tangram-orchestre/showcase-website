@@ -46,7 +46,7 @@
 </template>
 
 <style lang="scss" scoped>
-$animate-in-title-time: 1000ms;
+$animate-in-title-time: 1500ms;
 $animate-in-title-duration: 1000ms;
 $animate-in-main-time: $animate-in-title-time + 700ms;
 $animate-in-main-duration: 1000ms;
