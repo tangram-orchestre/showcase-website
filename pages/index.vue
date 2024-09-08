@@ -66,10 +66,7 @@ const items = [
               <h1 class="roboto-light text-2xl">
                 {{ index + 1 }}. {{ item.title }}
               </h1>
-              <p
-                class="mt-2 text-justify tracking-wide"
-                v-html="item.message"
-              ></p>
+              <p class="lora mt-2 text-justify" v-html="item.message"></p>
             </div>
             <NuxtImg
               :class="{ 'lg:order-first': index % 2 == 1 }"
