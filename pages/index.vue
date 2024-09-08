@@ -29,7 +29,7 @@ const items = [
 
   <div class="min-h-screen overflow-hidden">
     <div
-      class="fixed top-0 z-30 w-full bg-white p-4 text-center font-['Roboto-Light'] text-3xl text-gray-800 shadow-xl"
+      class="roboto-light fixed top-0 z-30 w-full bg-white p-4 text-center text-3xl text-gray-800 shadow-xl"
     >
       TANGRAM
     </div>
@@ -45,12 +45,12 @@ const items = [
           class="title-container flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-opacity duration-1000 lg:pt-0"
         >
           <div
-            class="title font-['Roboto-Thin'] text-[calc(clamp(1px,15vw,6rem))] leading-[1.067em]"
+            class="title roboto-thin text-[calc(clamp(1px,15vw,6rem))] leading-[1.067em]"
           >
             TANGRAM
           </div>
           <div
-            class="sub-title text-center font-['Oswald'] text-[calc(clamp(1px,3vw,1.3rem))] tracking-wide"
+            class="sub-title oswald text-center text-[calc(clamp(1px,3vw,1.3rem))] tracking-wide"
           >
             Orchestre amateur pour Chef⸱fe⸱s en herbe
           </div>
@@ -63,7 +63,7 @@ const items = [
         <template v-for="(item, index) in items" :key="item.message">
           <div class="mt-20 grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div class="">
-              <h1 class="font-['Roboto-Light'] text-2xl">
+              <h1 class="roboto-light text-2xl">
                 {{ index + 1 }}. {{ item.title }}
               </h1>
               <p
