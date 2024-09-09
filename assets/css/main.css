@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:wght@100;300;400&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:wght@100;300;400&family=Raleway:ital,wght@0,100..900;1,100..900&family=Lilita+One&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,6 +31,12 @@
 .raleway {
   font-family: "Raleway", sans-serif;
   font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lilita-one-regular {
+  font-family: "Lilita One", sans-serif;
   font-weight: 400;
   font-style: normal;
 }

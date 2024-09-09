@@ -1,24 +1,34 @@
 <script setup lang="ts">
 const items = [
   {
-    title: "Découvrir la direction",
-    message:
-      "Chez Tangram, nous croyons à la démocratisation de l’<strong>art de la direction d’orchestre</strong>. Notre ensemble offre des opportunités uniques aux musicien·ne·s amateur·e·s de monter sur le podium et d'<strong>explorer</strong> les rôles de chef·fe d’orchestre et d’arrangeur·euse. À travers des <strong>ateliers</strong> et des <strong>projets semestriels</strong>, chacun·e peut découvrir la joie de diriger un orchestre.",
+    title: "DÉCOUVRIR LA DIRECTION",
+    message: [
+      "Chez Tangram, nous croyons à la démocratisation de l’<strong>art de la direction d’orchestre</strong>.",
+      "Notre ensemble offre des opportunités uniques aux musicien·ne·s amateur·e·s de monter sur le podium et d'<strong>explorer</strong> les rôles de chef·fe d’orchestre et d’arrangeur·euse.",
+      "À travers des <strong>ateliers</strong> et des <strong>projets semestriels</strong>, chacun·e peut découvrir la joie de diriger un orchestre.",
+    ],
     image: "/images/cc-chef.png",
+    title_classes: ["text-[#ffc303]"],
     bg_classes: [],
   },
   {
-    title: "Impliquer le public",
-    message:
-      "Nous souhaitons <strong>rapprocher les musicien·ne·s et le public</strong> en démystifiant les rôles de chef·fe d’orchestre et d’arrangeur·euse. À travers des présentations de concert enrichissantes et des <strong>clés d’écoute</strong>, nous invitons le public à <strong>voir</strong>, <strong>entendre</strong> et <strong>comprendre</strong> plus profondément le processus de création musicale.",
+    title: "IMPLIQUER LE PUBLIC",
+    message: [
+      "Nous souhaitons <strong>rapprocher les musicien·ne·s et le public</strong> en démystifiant les rôles de chef·fe d’orchestre et d’arrangeur·euse. ",
+      "À travers des présentations de concert enrichissantes et des <strong>clés d’écoute</strong>, nous invitons le public à <strong>voir</strong>, <strong>entendre</strong> et <strong>comprendre</strong> plus profondément le processus de création musicale.",
+    ],
     image: "/images/cc-chef.png",
+    title_classes: ["text-[#ff5b62]"],
     bg_classes: [],
   },
   {
-    title: "Valoriser la qualité musicale",
-    message:
-      "Chez Tangram, la qualité musicale est primordiale, mais notre engagement pour une <strong>exploration musicale inclusive</strong> l’est tout autant. Nous équilibrons excellence musicale et esprit d’apprentissage, créant ainsi une <strong>ambiance dynamique et enrichissante</strong>.",
+    title: "VALORISER LA QUALITÉ MUSICALE",
+    message: [
+      "Chez Tangram, la qualité musicale est primordiale, mais notre engagement pour une <strong>exploration musicale inclusive</strong> l’est tout autant.",
+      "Nous équilibrons excellence musicale et esprit d’apprentissage, créant ainsi une <strong>ambiance dynamique et enrichissante</strong>.",
+    ],
     image: "/images/cc-chef.png",
+    title_classes: ["text-[#81ccb5]"],
     bg_classes: [],
   },
 ];
@@ -38,7 +48,7 @@ const items = [
     </div>
 
     <div
-      class="heading mx-auto mt-32 grid max-w-4xl justify-items-center ease-in-out"
+      class="heading mx-auto my-32 grid max-w-4xl justify-items-center ease-in-out"
     >
       <div class="logo">
         <TheLogo class="size-full" />
@@ -59,30 +69,44 @@ const items = [
       </div>
     </div>
 
-    <main class="mt-10 transition-opacity delay-500 duration-1000">
-      <template v-for="(item, index) in items" :key="item.message">
-        <div :class="item.bg_classes">
+    <main>
+      <div
+        class="mt-6 bg-gradient-to-bl from-slate-900 to-slate-950 px-4 py-12 text-white transition-opacity delay-500 duration-1000 sm:py-12"
+      >
+        <h1 class="lilita-one-regular my-8 text-center text-5xl sm:my-8">
+          NOS VALEURS
+        </h1>
+        <div
+          v-for="(item, index) in items"
+          :key="item.title"
+          class="mx-auto grid max-w-screen-xl grid-cols-1 gap-x-8 gap-y-4 py-10 sm:grid-cols-2"
+        >
+          <div class="my-auto">
+            <h2
+              class="lilita-one-regular text-center text-4xl"
+              :class="item.title_classes"
+            >
+              {{ item.title }}
+            </h2>
+            <p
+              v-for="paragraph in item.message"
+              :key="paragraph"
+              class="raleway my-4 hyphens-auto text-pretty text-justify indent-8 sm:mb-0 sm:mt-4 sm:text-lg"
+              lang="fr"
+              v-html="paragraph"
+            ></p>
+          </div>
           <div
-            class="mx-auto grid max-w-screen-lg grid-cols-1 gap-8 px-4 py-10 lg:grid-cols-2"
+            :class="{ 'sm:order-first': index % 2 == 1 }"
+            class="flex items-center"
           >
-            <div class="">
-              <h1 class="roboto-light text-2xl">
-                {{ index + 1 }}. {{ item.title }}
-              </h1>
-              <p
-                class="raleway mt-2 text-pretty text-justify"
-                v-html="item.message"
-              ></p>
-            </div>
             <NuxtImg
-              :class="{ 'lg:order-first': index % 2 == 1 }"
               :src="item.image"
               class="w-full rounded-2xl drop-shadow-lg"
             ></NuxtImg>
           </div>
         </div>
-      </template>
-      <div class="mt-24"></div>
+      </div>
     </main>
   </div>
 </template>
