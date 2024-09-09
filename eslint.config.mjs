@@ -8,6 +8,7 @@ export default withNuxt(
     files: ["**/*.ts", "**/*.vue", "**/*.mjs"],
     rules: {
       "vue/no-multiple-template-root": "off",
+      "vue/no-v-html": "off",
     },
   },
   eslintPluginPrettierRecommended,

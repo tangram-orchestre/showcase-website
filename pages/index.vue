@@ -3,20 +3,23 @@ const items = [
   {
     title: "Découvrir la direction",
     message:
-      "Chez Tangram, nous croyons à la démocratisation de l’<strong>art de la direction d’orchestre</strong>. Notre ensemble offre des opportunités uniques aux musicien·ne·s amateur·e·s de monter sur le podium et d'<strong>explorer</strong> les rôles de chef·fe d’orchestre et d’arrangeur·euse. À travers des <strong>ateliers</strong>, des sessions spéciales et des <strong>projets semestriels</strong>, chacun·e peut découvrir la joie de diriger un orchestre.",
+      "Chez Tangram, nous croyons à la démocratisation de l’<strong>art de la direction d’orchestre</strong>. Notre ensemble offre des opportunités uniques aux musicien·ne·s amateur·e·s de monter sur le podium et d'<strong>explorer</strong> les rôles de chef·fe d’orchestre et d’arrangeur·euse. À travers des <strong>ateliers</strong> et des <strong>projets semestriels</strong>, chacun·e peut découvrir la joie de diriger un orchestre.",
     image: "/images/cc-chef.png",
+    bg_classes: [],
   },
   {
     title: "Impliquer le public",
     message:
-      "Nous souhaitons rapprocher les musicien·ne·s et le public en démystifiant les rôles de chef·fe d’orchestre et d’arrangeur·euse. À travers des présentations de concert enrichissantes et des clés d’écoute, nous invitons le public à voir, entendre et comprendre plus profondément le processus de création musicale.",
+      "Nous souhaitons <strong>rapprocher les musicien·ne·s et le public</strong> en démystifiant les rôles de chef·fe d’orchestre et d’arrangeur·euse. À travers des présentations de concert enrichissantes et des <strong>clés d’écoute</strong>, nous invitons le public à <strong>voir</strong>, <strong>entendre</strong> et <strong>comprendre</strong> plus profondément le processus de création musicale.",
     image: "/images/cc-chef.png",
+    bg_classes: [],
   },
   {
     title: "Valoriser la qualité musicale",
     message:
-      "Chez Tangram, la qualité musicale est primordiale, mais notre engagement pour une exploration musicale inclusive l’est tout autant. Que vous soyez ici pour affiner votre jeu ou pour explorer la direction et l’arrangement, notre ensemble valorise la contribution de chaque membre. Nous équilibrons excellence musicale et esprit d’apprentissage, créant ainsi une ambiance dynamique et enrichissante.",
+      "Chez Tangram, la qualité musicale est primordiale, mais notre engagement pour une <strong>exploration musicale inclusive</strong> l’est tout autant. Nous équilibrons excellence musicale et esprit d’apprentissage, créant ainsi une <strong>ambiance dynamique et enrichissante</strong>.",
     image: "/images/cc-chef.png",
+    bg_classes: [],
   },
 ];
 </script>
@@ -34,39 +37,42 @@ const items = [
       TANGRAM
     </div>
 
-    <div class="container mx-auto px-4">
+    <div
+      class="heading mx-auto mt-32 grid max-w-4xl justify-items-center ease-in-out"
+    >
+      <div class="logo">
+        <TheLogo class="size-full" />
+      </div>
       <div
-        class="heading mx-auto mt-32 grid max-w-4xl justify-items-center ease-in-out"
+        class="title-container flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-opacity duration-1000 lg:pt-0"
       >
-        <div class="logo">
-          <TheLogo class="size-full" />
+        <div
+          class="title roboto-thin text-[calc(clamp(1px,15vw,6rem))] leading-[1.067em]"
+        >
+          TANGRAM
         </div>
         <div
-          class="title-container flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-opacity duration-1000 lg:pt-0"
+          class="sub-title oswald text-center text-[calc(clamp(1px,3vw,1.3rem))] tracking-wide"
         >
-          <div
-            class="title roboto-thin text-[calc(clamp(1px,15vw,6rem))] leading-[1.067em]"
-          >
-            TANGRAM
-          </div>
-          <div
-            class="sub-title oswald text-center text-[calc(clamp(1px,3vw,1.3rem))] tracking-wide"
-          >
-            Orchestre amateur pour Chef⸱fe⸱s en herbe
-          </div>
+          Orchestre amateur pour Chef⸱fe⸱s en herbe
         </div>
       </div>
+    </div>
 
-      <main
-        class="mx-auto mt-24 max-w-screen-lg transition-opacity delay-500 duration-1000"
-      >
-        <template v-for="(item, index) in items" :key="item.message">
-          <div class="mt-20 grid grid-cols-1 gap-8 lg:grid-cols-2">
+    <main class="mt-10 transition-opacity delay-500 duration-1000">
+      <template v-for="(item, index) in items" :key="item.message">
+        <div :class="item.bg_classes">
+          <div
+            class="mx-auto grid max-w-screen-lg grid-cols-1 gap-8 px-4 py-10 lg:grid-cols-2"
+          >
             <div class="">
               <h1 class="roboto-light text-2xl">
                 {{ index + 1 }}. {{ item.title }}
               </h1>
-              <p class="lora mt-2 text-justify" v-html="item.message"></p>
+              <p
+                class="raleway mt-2 text-pretty text-justify"
+                v-html="item.message"
+              ></p>
             </div>
             <NuxtImg
               :class="{ 'lg:order-first': index % 2 == 1 }"
@@ -74,9 +80,10 @@ const items = [
               class="w-full rounded-2xl drop-shadow-lg"
             ></NuxtImg>
           </div>
-        </template>
-      </main>
-    </div>
+        </div>
+      </template>
+      <div class="mt-24"></div>
+    </main>
   </div>
 </template>
 
