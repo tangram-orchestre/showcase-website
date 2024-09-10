@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const items = [
   {
-    title: "DÉCOUVRIR LA DIRECTION",
+    title: "FAIRE DÉCOUVRIR LA DIRECTION",
     message: [
       "Chez Tangram, nous croyons à la démocratisation de l’<strong>art de la direction d’orchestre</strong>.",
       "Notre ensemble offre des opportunités uniques aux musicien·ne·s amateur·e·s de monter sur le podium et d'<strong>explorer</strong> les rôles de chef·fe d’orchestre et d’arrangeur·euse.",
       "À travers des <strong>ateliers</strong> et des <strong>projets semestriels</strong>, chacun·e peut découvrir la joie de diriger un orchestre.",
     ],
     image: "/images/cc-chef.png",
-    title_classes: ["text-[#ffc303]"],
+    title_classes: ["text-[#81ccb5]"],
     bg_classes: [],
   },
   {
@@ -17,8 +17,8 @@ const items = [
       "Nous souhaitons <strong>rapprocher les musicien·ne·s et le public</strong> en démystifiant les rôles de chef·fe d’orchestre et d’arrangeur·euse. ",
       "À travers des présentations de concert enrichissantes et des <strong>clés d’écoute</strong>, nous invitons le public à <strong>voir</strong>, <strong>entendre</strong> et <strong>comprendre</strong> plus profondément le processus de création musicale.",
     ],
-    image: "/images/cc-chef.png",
-    title_classes: ["text-[#ff5b62]"],
+    image: "/images/arthur-chef.png",
+    title_classes: ["text-[#81ccb5]"],
     bg_classes: [],
   },
   {
@@ -27,7 +27,7 @@ const items = [
       "Chez Tangram, la qualité musicale est primordiale, mais notre engagement pour une <strong>exploration musicale inclusive</strong> l’est tout autant.",
       "Nous équilibrons excellence musicale et esprit d’apprentissage, créant ainsi une <strong>ambiance dynamique et enrichissante</strong>.",
     ],
-    image: "/images/cc-chef.png",
+    image: "/images/group-a24.jpg",
     title_classes: ["text-[#81ccb5]"],
     bg_classes: [],
   },
@@ -71,12 +71,12 @@ const items = [
 
     <main>
       <div
-        class="mt-6 bg-gradient-to-bl from-slate-900 to-slate-950 px-4 py-12 text-white transition-opacity delay-500 duration-1000"
+        class="mt-6 bg-slate-900 px-4 py-12 text-white transition-opacity delay-500 duration-1000"
       >
         <h1
-          class="lilita-one-regular my-8 text-center text-5xl sm:my-8 sm:text-7xl"
+          class="oswald my-8 text-center text-5xl tracking-wider sm:my-8 sm:text-7xl"
         >
-          NOS VALEURS
+          NOS MISSIONS
         </h1>
         <div
           v-for="(item, index) in items"
@@ -100,11 +100,11 @@ const items = [
           </div>
           <div
             :class="{ 'sm:order-first': index % 2 == 1 }"
-            class="flex items-center"
+            class="flex items-center px-4"
           >
             <NuxtImg
               :src="item.image"
-              class="w-full rounded-2xl drop-shadow-lg"
+              class="image aspect-video w-full rounded-2xl border-2 border-[#ffffff8f]"
             ></NuxtImg>
           </div>
         </div>
@@ -165,5 +165,9 @@ main {
   opacity: 0;
   animation: opacity-animation $animate-in-main-duration ease-in-out
     $animate-in-main-time forwards;
+}
+
+.image {
+  box-shadow: 0.7em 0.7em 2em #000000a6;
 }
 </style>
