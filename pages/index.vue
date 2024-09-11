@@ -7,9 +7,15 @@ const items = [
       "Notre ensemble offre des opportunités uniques aux musicien·ne·s amateur·e·s de monter sur le podium et d'<strong>explorer</strong> les rôles de chef·fe d’orchestre et d’arrangeur·euse.",
       "À travers des <strong>ateliers</strong> et des <strong>projets semestriels</strong>, chacun·e peut découvrir la joie de diriger un orchestre.",
     ],
-    image: "/images/cc-chef.png",
+    images: [
+      "/images/chefs/cc.jpg",
+      "/images/chefs/rindra.jpg",
+      "/images/chefs/simon.jpg",
+      "/images/chefs/guillaume.jpg",
+      "/images/chefs/ryad.jpg",
+      "/images/chefs/zelie.jpg",
+    ],
     title_classes: ["text-[#81ccb5]"],
-    bg_classes: [],
   },
   {
     title: "IMPLIQUER LE PUBLIC",
@@ -17,21 +23,29 @@ const items = [
       "Nous souhaitons <strong>rapprocher les musicien·ne·s et le public</strong> en démystifiant les rôles de chef·fe d’orchestre et d’arrangeur·euse. ",
       "À travers des présentations de concert enrichissantes et des <strong>clés d’écoute</strong>, nous invitons le public à <strong>voir</strong>, <strong>entendre</strong> et <strong>comprendre</strong> plus profondément le processus de création musicale.",
     ],
-    image: "/images/arthur-chef.png",
+    images: ["/images/partoches.jpg"],
     title_classes: ["text-[#81ccb5]"],
-    bg_classes: [],
   },
   {
-    title: "VALORISER LA QUALITÉ MUSICALE",
+    title: "SE RASSEMBLER AVEC LA MUSIQUE",
     message: [
-      "Chez Tangram, la qualité musicale est primordiale, mais notre engagement pour une <strong>exploration musicale inclusive</strong> l’est tout autant.",
-      "Nous équilibrons excellence musicale et esprit d’apprentissage, créant ainsi une <strong>ambiance dynamique et enrichissante</strong>.",
+      "Chez Tangram, l’essentiel est de faire de la musique avec <strong>joie et bienveillance</strong>. Chacun·e apporte son énergie et sa sensibilité pour enrichir notre son collectif.",
+      "Votre présence et votre enthousiasme font la différence et contribuent à une <strong>aventure musicale partagée</strong>.",
     ],
-    image: "/images/group-a24.jpg",
+    images: ["/images/groupe-a24.jpg"],
     title_classes: ["text-[#81ccb5]"],
-    bg_classes: [],
   },
 ];
+
+const currentImageIndex = ref(0);
+
+const currentImage = (list: string[], index: number) => {
+  return index == currentImageIndex.value % list.length;
+};
+
+useIntervalFn(() => {
+  currentImageIndex.value++;
+}, 8000);
 </script>
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
@@ -102,10 +116,23 @@ const items = [
             :class="{ 'sm:order-first': index % 2 == 1 }"
             class="flex items-center px-4"
           >
-            <NuxtImg
-              :src="item.image"
-              class="image aspect-video w-full rounded-2xl border-2 border-[#ffffff8f]"
-            ></NuxtImg>
+            <div
+              class="image-shadow relative aspect-video w-full rounded-2xl border-[#ffffff8f]"
+            >
+              <NuxtImg
+                v-for="(image, imageIndex) in item.images"
+                :key="image"
+                :src="image"
+                :class="{
+                  'z-10 opacity-100': currentImage(item.images, imageIndex),
+                  'z-0 opacity-0 delay-1000': !currentImage(
+                    item.images,
+                    imageIndex,
+                  ),
+                }"
+                class="absolute inset-0 rounded-2xl border-2 transition-opacity duration-1000"
+              ></NuxtImg>
+            </div>
           </div>
         </div>
       </div>
@@ -167,7 +194,7 @@ main {
     $animate-in-main-time forwards;
 }
 
-.image {
+.image-shadow {
   box-shadow: 0.7em 0.7em 2em #000000a6;
 }
 </style>
