@@ -114,7 +114,7 @@ useIntervalFn(() => {
           </div>
           <div
             :class="{ 'sm:order-first': index % 2 == 1 }"
-            class="flex items-center px-4"
+            class="flex items-center md:px-2"
           >
             <div
               class="image-shadow relative aspect-video w-full rounded-2xl border-[#ffffff8f]"
