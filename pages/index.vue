@@ -62,7 +62,7 @@ useIntervalFn(() => {
     </div>
 
     <div
-      class="heading mx-auto my-24 grid max-w-4xl justify-items-center ease-in-out"
+      class="heading mx-auto mb-20 mt-40 grid max-w-4xl justify-items-center ease-in-out"
     >
       <div class="logo">
         <TheLogo class="size-full" />
