@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { breakpointsTailwind } from "@vueuse/core";
 import ConcertLink from "../components/ConcertLink.vue";
 import { match } from "ts-pattern";
+
+const breakpoints = useBreakpoints(breakpointsTailwind);
 
 const missions = [
   {
@@ -118,6 +121,28 @@ const carrousel = (list: string[]) => {
     list[(currentImageIndex.value + 1) % list.length],
   ];
 };
+
+const displayedConcertCount = ref(0);
+const displayedConcertManuallyChanged = ref(false);
+
+const adjustDisplayedConcertCount = () => {
+  if (displayedConcertManuallyChanged.value) {
+    return;
+  }
+
+  if (breakpoints.xl.value) {
+    displayedConcertCount.value = 7;
+  } else if (breakpoints.lg.value) {
+    displayedConcertCount.value = 5;
+  } else if (breakpoints.sm.value) {
+    displayedConcertCount.value = 3;
+  } else {
+    displayedConcertCount.value = 3;
+  }
+};
+
+useEventListener("resize", adjustDisplayedConcertCount);
+onMounted(adjustDisplayedConcertCount);
 </script>
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
@@ -159,10 +184,8 @@ const carrousel = (list: string[]) => {
     </div>
 
     <main>
-      <div class="bg-slate-900 px-4 py-12 text-white">
-        <h1
-          class="oswald my-8 text-center text-6xl tracking-wider sm:my-8 sm:text-7xl"
-        >
+      <div class="bg-slate-900 px-4 py-16 text-white">
+        <h1 class="oswald mb-8 text-center text-6xl tracking-wider sm:text-7xl">
           NOS MISSIONS
         </h1>
         <div
@@ -210,10 +233,8 @@ const carrousel = (list: string[]) => {
         </div>
       </div>
 
-      <div class="mx-auto max-w-screen-2xl px-4 py-12">
-        <h1
-          class="oswald mt-8 text-center text-6xl tracking-wider sm:my-8 sm:text-7xl"
-        >
+      <div class="mx-auto max-w-screen-2xl px-4 py-16">
+        <h1 class="oswald text-center text-6xl tracking-wider sm:text-7xl">
           NOS CONCERTS
         </h1>
 
@@ -221,14 +242,13 @@ const carrousel = (list: string[]) => {
           class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
           <div
-            v-for="concert in concerts"
+            v-for="concert in concerts.slice(0, displayedConcertCount)"
             :key="concert.date"
             class="flex flex-col rounded-3xl bg-slate-900 p-4 text-center text-white shadow-xl transition-all duration-200 hover:scale-105"
           >
             <NuxtImg
               :src="concert.image"
               class="mb-4 aspect-video rounded-2xl border-2"
-              placeholder
               quality="70"
             />
             <div class="flex grow flex-col justify-center">
@@ -267,6 +287,24 @@ const carrousel = (list: string[]) => {
                 "
               />
             </div>
+          </div>
+          <div
+            v-if="displayedConcertCount < concerts.length"
+            class="lilita-one-regular flex min-h-44 flex-col items-center justify-center text-center text-[5rem]"
+          >
+            <button
+              class="hover:slate-800 flex size-32 items-center justify-center gap-2 rounded-full bg-slate-900 text-white hover:bg-slate-950"
+              @click="
+                displayedConcertCount += 2;
+                displayedConcertManuallyChanged = true;
+              "
+            >
+              <div
+                v-for="i in [0, 1, 2]"
+                :key="i"
+                class="size-4 rounded-full bg-white"
+              ></div>
+            </button>
           </div>
         </div>
       </div>
