@@ -117,9 +117,13 @@
     $shadow: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
     $perspective: translateZ(100px + $time-offset) scale(1.1);
 
-    .#{$name} > div {
+    .animate & .#{$name} > div {
       animation: #{$name}-animation $animation-length ease-in-out forwards;
       animation-delay: $time-offset + s;
+    }
+    .skip-animation & .#{$name} > div {
+      animation-delay: 0ms;
+      animation-duration: 500ms;
     }
 
     @keyframes #{$name}-animation {
@@ -137,9 +141,14 @@
       }
     }
 
-    .#{$name} {
+    .animate & .#{$name} {
       animation: #{$name}-animation-filter $animation-length ease-in-out forwards;
       animation-delay: $time-offset + s;
+    }
+
+    .skip-animation & .#{$name} {
+      animation-delay: 0ms;
+      animation-duration: 500ms;
     }
 
     @keyframes #{$name}-animation-filter {

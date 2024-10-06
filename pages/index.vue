@@ -94,23 +94,30 @@ const concerts: Array<Concert> = [
   },
 ];
 
+const animate = ref(false);
+const animationShowed = useSessionStorage("animation-showed", false);
+
 const currentImageIndex = ref(0);
 
-const previousImage = (list: string[]) => {
-  return (currentImageIndex.value - 1) % list.length;
-};
+onMounted(() => {
+  animate.value = true;
 
-const currentImage = (list: string[]) => {
-  return currentImageIndex.value % list.length;
-};
+  setTimeout(() => {
+    animationShowed.value = true;
+  }, 4000);
 
-const nextImage = (list: string[]) => {
-  return (currentImageIndex.value + 1) % list.length;
-};
+  useIntervalFn(() => {
+    currentImageIndex.value++;
+  }, 8000);
+});
 
-useIntervalFn(() => {
-  currentImageIndex.value++;
-}, 8000);
+const carrousel = (list: string[]) => {
+  return [
+    list[(currentImageIndex.value - 1) % list.length],
+    list[currentImageIndex.value % list.length],
+    list[(currentImageIndex.value + 1) % list.length],
+  ];
+};
 </script>
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
@@ -119,7 +126,10 @@ useIntervalFn(() => {
     <Title>Tangram Orchestre</Title>
   </Head>
 
-  <div class="min-h-screen overflow-hidden">
+  <div
+    :class="{ animate, 'skip-animation': animationShowed }"
+    class="min-h-screen overflow-hidden"
+  >
     <div
       class="roboto-light fixed top-0 z-30 w-full bg-white p-4 text-center text-3xl text-gray-800 shadow-xl"
     >
@@ -133,7 +143,7 @@ useIntervalFn(() => {
         <TheLogo class="size-full" />
       </div>
       <div
-        class="title-container flex flex-col items-center justify-center pt-4 drop-shadow-2xl transition-opacity duration-1000 lg:pt-0"
+        class="title-container flex flex-col items-center justify-center pt-4 drop-shadow-2xl lg:pt-0"
       >
         <div
           class="title roboto-thin text-[calc(clamp(1px,15vw,6rem))] leading-[1.067em]"
@@ -151,24 +161,24 @@ useIntervalFn(() => {
     <main>
       <div class="bg-slate-900 px-4 py-12 text-white">
         <h1
-          class="oswald my-8 text-center text-5xl tracking-wider sm:my-8 sm:text-7xl"
+          class="oswald my-8 text-center text-6xl tracking-wider sm:my-8 sm:text-7xl"
         >
           NOS MISSIONS
         </h1>
         <div
-          v-for="(item, index) in missions"
-          :key="item.title"
+          v-for="(mission, index) in missions"
+          :key="mission.title"
           class="mx-auto grid max-w-screen-xl grid-cols-1 gap-x-8 gap-y-4 py-10 sm:grid-cols-2"
         >
           <div class="my-auto">
             <h2
               class="lilita-one-regular text-center text-4xl"
-              :class="item.title_classes"
+              :class="mission.title_classes"
             >
-              {{ item.title }}
+              {{ mission.title }}
             </h2>
             <p
-              v-for="paragraph in item.message"
+              v-for="paragraph in mission.message"
               :key="paragraph"
               class="raleway my-4 hyphens-auto text-pretty text-justify indent-8 sm:mb-0 sm:mt-4 sm:text-lg"
               lang="fr"
@@ -183,11 +193,7 @@ useIntervalFn(() => {
               class="image-shadow relative aspect-video w-full rounded-2xl border-[#ffffff8f]"
             >
               <NuxtImg
-                v-for="(image, imageIndex) in [
-                  item.images[previousImage(item.images)],
-                  item.images[currentImage(item.images)],
-                  item.images[nextImage(item.images)],
-                ]"
+                v-for="(image, imageIndex) in carrousel(mission.images)"
                 :key="image"
                 :src="image"
                 :class="
@@ -204,9 +210,9 @@ useIntervalFn(() => {
         </div>
       </div>
 
-      <div class="mx-auto min-h-screen max-w-screen-2xl px-4 py-12">
+      <div class="mx-auto max-w-screen-2xl px-4 py-12">
         <h1
-          class="oswald mt-8 text-center text-5xl tracking-wider sm:my-8 sm:text-7xl"
+          class="oswald mt-8 text-center text-6xl tracking-wider sm:my-8 sm:text-7xl"
         >
           NOS CONCERTS
         </h1>
@@ -304,22 +310,41 @@ $animate-in-main-duration: 1000ms;
 
 @media (min-width: 1024px) {
   .heading {
-    animation: grid-animation $animate-in-title-duration ease-in-out
-      $animate-in-title-time forwards;
     max-width: 950px;
+    grid-template-columns: 100% 0;
+    .animate & {
+      animation: grid-animation $animate-in-title-duration ease-in-out
+        $animate-in-title-time forwards;
+    }
+    .skip-animation & {
+      animation-delay: 0ms;
+      animation-duration: 500ms;
+    }
   }
 }
 
 .title-container {
   opacity: 0;
-  animation: opacity-animation $animate-in-title-duration ease-in-out
-    $animate-in-title-time forwards;
+  .animate & {
+    animation: opacity-animation $animate-in-title-duration ease-in-out
+      $animate-in-title-time forwards;
+  }
+  .skip-animation & {
+    animation-delay: 0ms;
+    animation-duration: 500ms;
+  }
 }
 
 main {
   opacity: 0;
-  animation: opacity-animation $animate-in-main-duration ease-in-out
-    $animate-in-main-time forwards;
+  .animate & {
+    animation: opacity-animation $animate-in-main-duration ease-in-out
+      $animate-in-main-time forwards;
+  }
+  .skip-animation & {
+    animation-delay: 0ms;
+    animation-duration: 500ms;
+  }
 }
 
 .image-shadow {
