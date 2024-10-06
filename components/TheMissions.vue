@@ -42,7 +42,7 @@ const missions = [
     title_classes: ["text-[#81ccb5]"],
   },
   {
-    title: "SE RASSEMBLER AVEC LA MUSIQUE",
+    title: "SE RASSEMBLER EN MUSIQUE",
     message: [
       "Chez Tangram, l’essentiel est de faire de la musique avec <strong>joie et bienveillance</strong>. Chacun·e apporte son énergie et sa sensibilité pour enrichir notre son collectif.",
       "Votre présence et votre enthousiasme font la différence et contribuent à une <strong>aventure musicale partagée</strong>.",
