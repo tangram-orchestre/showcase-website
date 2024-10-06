@@ -8,4 +8,5 @@ export interface Concert {
   location: string;
   image: string;
   url?: Url;
+  program?: Array<string>;
 }

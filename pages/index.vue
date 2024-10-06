@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const animate = ref(false);
-const animationShowed = useSessionStorage("animation-showed", false);
+const animationShowed = useSessionStorage("animation-showed", false, {
+  initOnMounted: true,
+});
 
 onMounted(() => {
   animate.value = true;
