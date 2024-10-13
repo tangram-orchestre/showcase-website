@@ -91,24 +91,39 @@ const concerts: Array<Concert> = [
         "https://www.youtube.com/watch?v=bRKj0I16uIs&list=PLaKZ2HpaR66HlhepL8kLuCIE-NtkGLos0",
     },
     program: [
-      "OSS 117",
-      "(Flying) Peter Pan",
-      "Pirates des Caraïbes",
-      "La planète au Trésor / Dinosaure / Atlantis",
-      '<span class="inline-block">Recette pour un cake d\'amour</span> <span class="inline-block">(Peau d\'Âne)</span>',
-      "How Far I'll Go (Vaiana)",
-      "Undertale Medley",
-      "Pelléas et Mélisande",
-      "Endcaller (Final Fantasy XIV)",
-      "This Land (Le Roi Lion)",
-      "Le Château dans le Ciel",
-      "Medley Abba",
+      { name: "Endcaller", direction: "Guillaume" },
+      { name: "Undertale", direction: "Selma / Théophile" },
+      { name: "Vaïana", direction: "Zélie" },
+      { name: "Medley James Newton Howard", direction: "Ryadh" },
+      { name: "Pirate des Caraïbes", direction: "Korantin" },
+      { name: "Peter Pan", direction: "Cédric" },
+      { name: "Pelléas et Mélisande", direction: "Anice" },
+      { name: "Medley ABBA", direction: "Max" },
+      { name: "Peau d'Âne", direction: "Simon" },
+      { name: "Le Château dans le Ciel", direction: "Yumi / Rindra" },
+      { name: "Le Roi Lion", direction: "Arthur" },
+      { name: "OSS 117", direction: "Alexis" },
     ],
   },
   {
     date: "29 janvier 2024",
     location: "Mairie du XIV<sup>ème</sup>",
     image: "/images/concerts/2024-01-24.png",
+    program: [
+      { name: "The Lord of the Rings", direction: "Arthur" },
+      { name: "Alice au pays des merveilles", direction: "Cédric" },
+      { name: "Pokémon", direction: "Etienne" },
+      { name: "Narnia" },
+      { name: "The Battle", direction: "Ryadh" },
+      { name: "Hollow knight", direction: "Noémie" },
+      { name: "Kung Fu Panda", direction: "Simon" },
+      { name: "Gladiator", direction: "Rindra" },
+      { name: "Final Fantasy XIV", direction: "Guillaume" },
+      { name: "Unbreakable", direction: "Gaétan" },
+      { name: "Violet Evergarden", direction: "Intila" },
+      { name: "Titina", direction: "Yumi" },
+      { name: "Hyper-espace", direction: "Anice" },
+    ],
   },
   {
     date: "15 décembre 2023",
@@ -118,6 +133,21 @@ const concerts: Array<Concert> = [
       kind: "Video",
       target: "https://www.youtube.com/watch?v=aLhweV3tKvc",
     },
+    program: [
+      { name: "The Lord of the Rings", direction: "Arthur" },
+      { name: "Alice au pays des merveilles", direction: "Cédric" },
+      { name: "Pokémon", direction: "Etienne" },
+      { name: "Narnia" },
+      { name: "The Battle", direction: "Ryadh" },
+      { name: "Hollow knight", direction: "Noémie" },
+      { name: "Kung Fu Panda", direction: "Simon" },
+      { name: "Gladiator", direction: "Rindra" },
+      { name: "Final Fantasy XIV", direction: "Guillaume" },
+      { name: "Unbreakable", direction: "Gaétan" },
+      { name: "Violet Evergarden", direction: "Intila" },
+      { name: "Titina", direction: "Yumi" },
+      { name: "Hyper-espace", direction: "Anice" },
+    ],
   },
   {
     date: "29 juin 2023",
@@ -127,6 +157,35 @@ const concerts: Array<Concert> = [
       kind: "Video",
       target: "https://www.youtube.com/watch?v=2NE-AwF7v2A",
     },
+    program: [
+      { name: "Chicken Run", direction: "Simon" },
+      { name: "Nausicaa", direction: "Cédric" },
+      { name: "Octopath Traveler", direction: "Intila" },
+      { name: "Cowboy Bebop", direction: "Anice" },
+      { name: "Across the stars", direction: "Thibaud" },
+      { name: "Narnia", direction: "Noémie" },
+      { name: "Le Parrain", direction: "Yumi" },
+      { name: "Sinbad", direction: "Ryadh" },
+      { name: "Star Trek", direction: "Luc" },
+      { name: "Legends Never Die", direction: "Arthur" },
+    ],
+  },
+  {
+    date: "21 janvier 2022",
+    location: "Maison du Japon",
+    image: "/images/concerts/2022-01-21.png",
+    program: [
+      { name: "Cinema Paradiso", direction: "Simon" },
+      { name: "Doctor Who", direction: "Amaury" },
+      { name: "How to train your dragon", direction: "Gaetan" },
+      { name: "Kiki", direction: "Thibaud" },
+      { name: "Le vent se lève", direction: "Cédric" },
+      { name: "Lord of the Dance", direction: "Emilie" },
+      { name: "Star Wars VII", direction: "Tanguy / Rindra" },
+      { name: "Cowboy Bebop", direction: "Yumi" },
+      { name: "Tintin", direction: "Arthur" },
+      { name: "Final Fantasy X", direction: "Arthur" },
+    ],
   },
 ];
 </script>
@@ -138,11 +197,13 @@ const concerts: Array<Concert> = [
     </h1>
 
     <Transition>
-      <div
-        v-if="focus && !focus.leaving"
-        class="backdrop fixed z-10 size-full"
-        @click="focus.leaving = true"
-      />
+      <Teleport to="body">
+        <div
+          v-if="focus && !focus.leaving"
+          class="backdrop fixed z-10 size-full"
+          @click="focus.leaving = true"
+        />
+      </Teleport>
     </Transition>
     <Transition
       name="focus"
@@ -155,28 +216,39 @@ const concerts: Array<Concert> = [
         <div
           v-if="focus && !focus.leaving"
           class="focused-container z-20"
+          :class="{ 'small-card': !concerts[focus.index].program }"
           @click="focus.leaving = true"
         >
           <div class="focused-container-inner">
             <ConcertCard
               :concert="concerts[focus.index]"
-              class="backface-hidden absolute size-full"
+              class="backface-hidden absolute size-full overflow-hidden"
             />
             <div
-              class="backface-hidden back flex size-full grow flex-col rounded-3xl border-4 bg-slate-900 p-4 text-white shadow-xl"
+              class="backface-hidden back no-scrollbar flex size-full grow flex-col overflow-auto rounded-3xl border-4 bg-slate-900 p-4 text-white shadow-xl"
             >
-              <div class="flex h-full flex-col overflow-scroll">
-                <h2 class="lilita-one-regular my-8 text-5xl">Programme</h2>
-                <ul
-                  class="raleway flex h-fit grow flex-col justify-center text-2xl"
-                >
-                  <li
-                    v-for="part in concerts[focus.index].program"
-                    :key="part"
-                    class="my-4"
-                    v-html="part"
-                  />
+              <div
+                v-if="concerts[focus.index].program"
+                class="mb-4 flex h-full flex-col gap-8"
+              >
+                <h2 class="lilita-one-regular mt-8 text-5xl">Programme</h2>
+                <ul class="raleway flex grow flex-col">
+                  <div
+                    v-for="program in concerts[focus.index].program"
+                    :key="program.name"
+                    class="my-3"
+                  >
+                    <p class="text-3xl">{{ program.name }}</p>
+                    <p v-if="program.direction">
+                      Dirigé par {{ program.direction }}
+                    </p>
+                  </div>
                 </ul>
+              </div>
+              <div v-else class="flex h-full flex-col justify-center">
+                <h2 class="lilita-one-regular text-4xl sm:text-5xl">
+                  Programme à venir...
+                </h2>
               </div>
             </div>
           </div>
@@ -195,7 +267,6 @@ const concerts: Array<Concert> = [
         :class="{
           'opacity-0 transition-none': index === focus?.index,
         }"
-        class="cursor-pointer"
         @click="focusConcert(index)"
       />
 
@@ -222,6 +293,16 @@ const concerts: Array<Concert> = [
 </template>
 
 <style scoped lang="scss">
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .focused-container {
   position: fixed;
   perspective: 1000px;
@@ -233,9 +314,15 @@ const concerts: Array<Concert> = [
   margin: 0 auto;
 }
 
+.small-card {
+  top: 40%;
+  bottom: 40%;
+}
+
 @media (max-width: 600px) {
   .focused-container {
-    margin: 0 10px;
+    right: 5%;
+    left: 5%;
   }
 }
 
@@ -260,6 +347,7 @@ const concerts: Array<Concert> = [
 .backface-hidden {
   *,
   & {
+    transform-style: preserve-3d;
     backface-visibility: hidden;
   }
 }
