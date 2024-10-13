@@ -267,6 +267,7 @@ const concerts: Array<Concert> = [
         :class="{
           'opacity-0 transition-none': index === focus?.index,
         }"
+        class="cursor-pointer"
         @click="focusConcert(index)"
       />
 
