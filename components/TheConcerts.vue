@@ -52,9 +52,12 @@ const concertRefs = useTemplateRefsList<InstanceType<typeof ConcertCard>>();
 const focusConcert = (index: number) => {
   const element = concertRefs.value[index].$el as HTMLDivElement;
   updateFocusedSource(element);
-  isLocked.value = true;
   focus.value = { index, element, leaving: false };
 };
+
+watch(focus, (focus) => {
+  isLocked.value = focus != null;
+});
 
 useEventListener("resize", () => {
   if (focus.value) {
@@ -205,13 +208,7 @@ const concerts: Array<Concert> = [
         />
       </Teleport>
     </Transition>
-    <Transition
-      name="focus"
-      @after-leave="
-        focus = null;
-        isLocked = false;
-      "
-    >
+    <Transition name="focus" @after-leave="focus = null">
       <Teleport to="body">
         <div
           v-if="focus && !focus.leaving"
