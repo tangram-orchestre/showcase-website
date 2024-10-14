@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   typescript: { typeCheck: true },
-  modules: ["@nuxt/eslint", "@vueuse/nuxt", "@nuxt/image"],
+  modules: ["@nuxt/eslint", "@vueuse/nuxt", "@nuxt/image", "@nuxt/icon"],
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {

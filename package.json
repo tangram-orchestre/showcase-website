@@ -14,6 +14,7 @@
     "lint:fix": "eslint . --fix && prettier --write --list-different ."
   },
   "dependencies": {
+    "@nuxt/icon": "^1.7.0",
     "@nuxt/image": "^1.8.0",
     "@vueuse/core": "^11.0.3",
     "@vueuse/nuxt": "^11.0.3",
