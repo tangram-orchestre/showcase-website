@@ -33,16 +33,19 @@ defineProps<{
             .exhaustive()
         "
         class="text-slate-950"
-        :class="
-          match(concert.url.kind)
+        :class="[
+          {
+            'pointer-events-none': concert.url.kind === 'Tickets Unavailable',
+          },
+          ...match(concert.url.kind)
             .with('Video', () => ['bg-[#ff5b62]', 'hover:bg-[#db4d53]'])
             .with('Tickets', () => ['bg-[#81ccb5]', 'hover:bg-[#6fb29e]'])
             .with('Tickets Unavailable', () => [
               'bg-[#81ccb5]',
               'brightness-75',
             ])
-            .exhaustive()
-        "
+            .exhaustive(),
+        ]"
       />
     </div>
   </div>
