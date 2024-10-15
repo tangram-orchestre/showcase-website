@@ -28,12 +28,15 @@ onMounted(adjustDisplayedConcertCount);
 
 const isLocked = useScrollLock(window);
 
-const focus: Ref<{
+interface FocusedConcert {
   index: number;
   element: HTMLDivElement;
   leaving: boolean;
-} | null> = ref(null);
-const focused = ref({
+}
+
+const focus: Ref<FocusedConcert | null> = ref(null);
+const nextFocus: Ref<number | null> = ref(null);
+const focusedCoordinates = ref({
   top: "0",
   right: "0",
   bottom: "0",
@@ -42,21 +45,32 @@ const focused = ref({
 
 const updateFocusedSource = (element: HTMLDivElement) => {
   const rect = element.getBoundingClientRect();
-  focused.value.top = rect.top + "px";
-  focused.value.right = window.innerWidth - rect.right + "px";
-  focused.value.bottom = window.innerHeight - rect.bottom + "px";
-  focused.value.left = rect.left + "px";
+  focusedCoordinates.value.top = rect.top + "px";
+  focusedCoordinates.value.right = window.innerWidth - rect.right + "px";
+  focusedCoordinates.value.bottom = window.innerHeight - rect.bottom + "px";
+  focusedCoordinates.value.left = rect.left + "px";
 };
 
 const concertRefs = useTemplateRefsList<InstanceType<typeof ConcertCard>>();
 const focusConcert = (index: number) => {
-  const element = concertRefs.value[index].$el as HTMLDivElement;
-  updateFocusedSource(element);
-  focus.value = { index, element, leaving: false };
+  if (focus.value) {
+    nextFocus.value = index;
+  } else {
+    const element = concertRefs.value[index].$el as HTMLDivElement;
+
+    updateFocusedSource(element);
+    focus.value = { index, element, leaving: false };
+  }
 };
 
 watch(focus, (focus) => {
   isLocked.value = focus != null;
+
+  if (focus === null && nextFocus.value != null) {
+    const index = nextFocus.value;
+    nextFocus.value = null;
+    focusConcert(index);
+  }
 });
 
 useEventListener("resize", () => {
@@ -368,10 +382,10 @@ $flip-reverse-delay: $animate-time - $flip-time;
 
 .focus-enter-from,
 .focus-leave-to {
-  top: v-bind("focused.top");
-  right: v-bind("focused.right");
-  bottom: v-bind("focused.bottom");
-  left: v-bind("focused.left");
+  top: v-bind("focusedCoordinates.top");
+  right: v-bind("focusedCoordinates.right");
+  bottom: v-bind("focusedCoordinates.bottom");
+  left: v-bind("focusedCoordinates.left");
 
   &.focused-container .focused-container-inner {
     transform: none;
@@ -385,6 +399,10 @@ $flip-reverse-delay: $animate-time - $flip-time;
   left: 0;
   backdrop-filter: blur(5px);
   transition: all $animate-time;
+
+  &.v-leave-active {
+    pointer-events: none;
+  }
 
   &.v-enter-from,
   &.v-leave-to {
