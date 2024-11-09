@@ -54,6 +54,7 @@ onMounted(() => {
       <TheMissions />
       <TheConcerts />
       <TheLinks />
+      <TheCagnotte />
     </main>
   </div>
 </template>
