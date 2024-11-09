@@ -94,8 +94,9 @@ const concerts: Array<Concert> = [
     location: "Pavillon de la Sirène",
     image: "/images/concerts/2024-12-07.png",
     url: {
-      kind: "Tickets Unavailable",
-      target: undefined,
+      kind: "Tickets",
+      target:
+        "https://www.helloasso.com/associations/tangram/evenements/tangram-concert-a-la-sirene-le-7-12-2024",
     },
   },
   {
