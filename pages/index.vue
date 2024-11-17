@@ -19,15 +19,15 @@ onMounted(() => {
   </Head>
 
   <div
+    class="roboto-light fixed top-0 z-30 w-full bg-white p-4 text-center text-3xl text-gray-800 shadow-xl"
+  >
+    TANGRAM
+  </div>
+
+  <div
     :class="{ animate, 'skip-animation': animationShowed }"
     class="min-h-screen overflow-hidden"
   >
-    <div
-      class="roboto-light fixed top-0 z-30 w-full bg-white p-4 text-center text-3xl text-gray-800 shadow-xl"
-    >
-      TANGRAM
-    </div>
-
     <div
       class="heading mx-auto mb-20 mt-40 grid max-w-4xl justify-items-center ease-in-out"
     >
@@ -56,6 +56,8 @@ onMounted(() => {
       <TheLinks />
       <TheCagnotte />
     </main>
+
+    <TheFooter />
   </div>
 </template>
 
