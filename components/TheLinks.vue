@@ -20,12 +20,12 @@ const links = [
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
-  <div class="bg-slate-900 px-4 pt-12 text-white">
+  <div class="bg-slate-900 px-4 pb-10 pt-20 text-white md:pb-16">
     <h1 class="oswald mb-8 text-center text-6xl tracking-wider sm:text-7xl">
       NOUS SUIVRE
     </h1>
     <div
-      class="container mx-auto flex flex-col items-center justify-center gap-x-20 py-8 text-[13rem] sm:flex-row sm:text-[10rem] md:text-[12rem]"
+      class="container mx-auto flex flex-col items-center justify-center gap-x-20 pt-6 text-[10rem] sm:flex-row md:text-[12rem]"
     >
       <a
         v-for="link in links"
