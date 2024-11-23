@@ -272,7 +272,8 @@ const concerts: Array<Concert> = [
       class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
     >
       <ConcertCard
-        v-for="(concert, index) in concerts.slice(0, displayedConcertCount)"
+        v-for="(concert, index) in concerts.slice(0, displayedConcertCount + 2)"
+        v-show="index < displayedConcertCount"
         :ref="concertRefs.set"
         :key="concert.date"
         :concert="concert"
