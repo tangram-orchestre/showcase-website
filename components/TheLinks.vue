@@ -25,12 +25,12 @@ const links = [
       NOUS SUIVRE
     </h1>
     <div
-      class="container mx-auto flex flex-col items-center justify-center gap-x-20 pt-6 text-[10rem] sm:flex-row md:text-[12rem]"
+      class="container mx-auto flex flex-col items-center justify-center gap-x-20 gap-y-4 pt-6 text-[8rem] sm:flex-row md:text-[10rem]"
     >
       <a
         v-for="link in links"
         :key="link.url"
-        class="block leading-none"
+        class="block leading-none hover:brightness-125"
         :href="link.url"
       >
         <Icon :name="link.icon" :class="link.class" />

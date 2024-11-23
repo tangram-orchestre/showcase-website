@@ -3,7 +3,7 @@
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
   <div ref="el" class="mx-auto max-w-screen-2xl px-8 py-20">
-    <h1 class="oswald text-center text-6xl tracking-wider sm:text-7xl">
+    <h1 class="oswald mb-8 text-center text-6xl tracking-wider sm:text-7xl">
       NOUS SOUTENIR
     </h1>
     <div class="flex justify-center">
@@ -24,7 +24,7 @@
             class="mt-6 grid grid-cols-1 items-center gap-y-4 rounded-3xl bg-slate-900 p-4 text-white md:grid-cols-5"
           >
             <a
-              class="lilita-one-regular col-span-2 block rounded-lg bg-[#81ccb5] px-8 py-4 text-center text-3xl text-black hover:bg-[#6fb29e]"
+              class="lilita-one-regular col-span-2 block rounded-lg border-2 bg-[#81ccb5] px-8 py-4 text-center text-3xl text-black hover:bg-[#8adac2]"
               href="https://www.helloasso.com/associations/tangram/formulaires/2"
             >
               Faites un don

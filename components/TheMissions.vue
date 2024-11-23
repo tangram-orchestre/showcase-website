@@ -45,7 +45,7 @@ const missions = [
     title: "SE RASSEMBLER EN MUSIQUE",
     message: [
       "Chez Tangram, l’essentiel est de faire de la musique avec <strong>joie et bienveillance</strong>. Chacun·e apporte son énergie et sa sensibilité pour enrichir notre son collectif.",
-      "La présence et l'enthousiasme de chacun font la différence et contribuent à une <strong>aventure musicale partagée</strong>.",
+      "La présence et l'enthousiasme de tous·tes font la différence et contribuent à une <strong>aventure musicale partagée</strong>.",
     ],
     images: ["/images/groupe-a24.jpg"],
     title_classes: ["text-[#81ccb5]"],

@@ -38,8 +38,8 @@ defineProps<{
             'pointer-events-none': concert.url.kind === 'Tickets Unavailable',
           },
           ...match(concert.url.kind)
-            .with('Video', () => ['bg-[#ff5b62]', 'hover:bg-[#db4d53]'])
-            .with('Tickets', () => ['bg-[#81ccb5]', 'hover:bg-[#6fb29e]'])
+            .with('Video', () => ['bg-[#ff5b62]', 'hover:bg-[#f86168]'])
+            .with('Tickets', () => ['bg-[#81ccb5]', 'hover:bg-[#8adac2]'])
             .with('Tickets Unavailable', () => [
               'bg-[#81ccb5]',
               'brightness-75',
