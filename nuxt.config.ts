@@ -33,4 +33,12 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
   },
+  fonts: {
+    families: [
+      { name: "Roboto", weights: [100, 300, 400] },
+      { name: "Oswald", weight: 300 },
+      { name: "Raleway" },
+      { name: "Lilita One" },
+    ],
+  },
 });
