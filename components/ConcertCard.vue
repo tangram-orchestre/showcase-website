@@ -12,15 +12,19 @@ defineProps<{
   >
     <NuxtPicture
       :src="concert.image"
+      :alt="`${concert.date} - ${concert.location}`"
+      class="aspect-video"
       quality="70"
-      :img-attrs="{ class: 'aspect-video rounded-2xl border-2' }"
+      :img-attrs="{ class: 'aspect-video rounded-2xl border-2 w-full' }"
     />
     <div class="flex grow flex-col justify-center">
-      <div
-        class="lilita-one-regular text-2xl tracking-wide"
-        v-html="concert.location"
-      />
-      <div class="raleway">{{ concert.date }}</div>
+      <div class="py-4">
+        <div
+          class="lilita-one-regular text-2xl tracking-wide"
+          v-html="concert.location"
+        />
+        <div class="raleway">{{ concert.date }}</div>
+      </div>
 
       <ConcertLink
         v-if="concert.url"

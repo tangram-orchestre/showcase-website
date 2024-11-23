@@ -30,6 +30,7 @@ const missions = [
       "/images/chefs/ryad.jpg",
       "/images/chefs/zelie.jpg",
     ],
+    alt: "Chef d'orchestre",
     title_classes: ["text-[#81ccb5]"],
   },
   {
@@ -39,6 +40,7 @@ const missions = [
       "À travers des présentations de concert enrichissantes et des <strong>clés d’écoute</strong>, nous invitons le public à <strong>voir</strong>, <strong>entendre</strong> et <strong>comprendre</strong> plus profondément le processus de création musicale.",
     ],
     images: ["/images/partoches.jpg"],
+    alt: "Photo d'un concert pédagogique avec affichage de la partition en temps réel",
     title_classes: ["text-[#81ccb5]"],
   },
   {
@@ -48,6 +50,7 @@ const missions = [
       "La présence et l'enthousiasme de tous·tes font la différence et contribuent à une <strong>aventure musicale partagée</strong>.",
     ],
     images: ["/images/groupe-a24.jpg"],
+    alt: "Photo de groupe des membres en 2024",
     title_classes: ["text-[#81ccb5]"],
   },
 ];
@@ -95,8 +98,9 @@ const missions = [
             "
             class="transition-opacity duration-1000"
             :img-attrs="{
-              class: 'absolute inset-0 rounded-2xl border-2',
+              class: 'w-full absolute inset-0 rounded-2xl border-2',
             }"
+            :alt="mission.alt"
             placeholder
             quality="70"
           />

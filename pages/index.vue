@@ -1,4 +1,10 @@
 <script setup lang="ts">
+useHead({
+  htmlAttrs: {
+    lang: "fr",
+  },
+});
+
 const animate = ref(false);
 const animationShowed = useSessionStorage("animation-showed", false, {
   initOnMounted: true,

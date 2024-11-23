@@ -289,6 +289,7 @@ const concerts: Array<Concert> = [
       >
         <button
           class="hover:slate-800 flex size-32 items-center justify-center gap-2 rounded-full bg-slate-900 text-white hover:bg-slate-950"
+          aria-label="Montrer plus de concerts"
           @click="
             displayedConcertCount += 2;
             displayedConcertManuallyChanged = true;
