@@ -1,11 +1,16 @@
 <script setup lang="ts">
 const currentImageIndex = ref(0);
 const carrousel = (list: string[]) => {
-  return [
-    list[(currentImageIndex.value - 1) % list.length],
-    list[currentImageIndex.value % list.length],
-    list[(currentImageIndex.value + 1) % list.length],
+  function mod(n: number, m: number) {
+    return ((n % m) + m) % m;
+  }
+
+  const newLocal = [
+    list[mod(currentImageIndex.value - 1, list.length)],
+    list[mod(currentImageIndex.value, list.length)],
+    list[mod(currentImageIndex.value + 1, list.length)],
   ];
+  return newLocal;
 };
 
 onMounted(() => {
