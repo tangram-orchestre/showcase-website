@@ -101,9 +101,10 @@ const missions = [
             :class="
               imageIndex == 1 ? 'z-10 opacity-100' : 'z-0 opacity-0 delay-1000'
             "
-            class="transition-opacity duration-1000"
+            class="aspect-video transition-opacity duration-1000"
             :img-attrs="{
-              class: 'w-full absolute inset-0 rounded-2xl border-2',
+              class:
+                'w-full aspect-video absolute inset-0 rounded-2xl border-2',
             }"
             :alt="mission.alt"
             placeholder
