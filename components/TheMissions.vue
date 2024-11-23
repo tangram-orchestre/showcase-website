@@ -86,14 +86,17 @@ const missions = [
         <div
           class="image-shadow relative aspect-video w-full rounded-2xl border-[#ffffff8f]"
         >
-          <NuxtImg
+          <NuxtPicture
             v-for="(image, imageIndex) in carrousel(mission.images)"
             :key="image"
             :src="image"
             :class="
               imageIndex == 1 ? 'z-10 opacity-100' : 'z-0 opacity-0 delay-1000'
             "
-            class="absolute inset-0 rounded-2xl border-2 transition-opacity duration-1000"
+            class="transition-opacity duration-1000"
+            :img-attrs="{
+              class: 'absolute inset-0 rounded-2xl border-2',
+            }"
             placeholder
             quality="70"
           />

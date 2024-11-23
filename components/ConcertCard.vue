@@ -10,10 +10,10 @@ defineProps<{
   <div
     class="flex flex-col rounded-3xl bg-slate-900 p-4 text-center text-white shadow-xl"
   >
-    <NuxtImg
+    <NuxtPicture
       :src="concert.image"
-      class="mb-4 aspect-video rounded-2xl border-2"
       quality="70"
+      :img-attrs="{ class: 'aspect-video rounded-2xl border-2' }"
     />
     <div class="flex grow flex-col justify-center">
       <div
