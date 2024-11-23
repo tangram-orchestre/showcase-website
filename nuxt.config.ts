@@ -6,7 +6,13 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   typescript: { typeCheck: true },
-  modules: ["@nuxt/eslint", "@vueuse/nuxt", "@nuxt/image", "@nuxt/icon"],
+  modules: [
+    "@nuxt/eslint",
+    "@vueuse/nuxt",
+    "@nuxt/image",
+    "@nuxt/icon",
+    "@nuxt/fonts",
+  ],
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {
@@ -23,5 +29,8 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+  nitro: {
+    compressPublicAssets: true,
   },
 });
