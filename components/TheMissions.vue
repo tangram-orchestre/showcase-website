@@ -121,6 +121,7 @@ const missions = [
             }"
             :alt="mission.alt"
             placeholder
+            sizes="300px xs:600px sm:350px md:450px lg:600px"
             quality="70"
           />
         </div>

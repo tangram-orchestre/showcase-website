@@ -15,6 +15,7 @@ defineProps<{
       :alt="`${concert.date} - ${concert.location}`"
       class="aspect-video"
       quality="70"
+      sizes="90vw sm:45vw lg:30vw xl:25vw"
       :img-attrs="{ class: 'aspect-video rounded-2xl border-2 w-full' }"
     />
     <div class="flex grow flex-col justify-center">
