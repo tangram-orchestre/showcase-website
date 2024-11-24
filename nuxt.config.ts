@@ -34,6 +34,11 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
   },
   fonts: {
+    defaults: {
+      weights: [400],
+      styles: ["normal"],
+      subsets: ["latin, latin-ext"],
+    },
     families: [
       { name: "Roboto", weights: [100, 300, 400] },
       { name: "Oswald", weight: 300 },
