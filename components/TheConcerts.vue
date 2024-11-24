@@ -237,30 +237,39 @@ const concerts: Array<Concert> = [
               class="backface-hidden absolute size-full overflow-hidden"
             />
             <div
-              class="backface-hidden back no-scrollbar flex size-full grow flex-col overflow-auto rounded-3xl border-4 bg-slate-900 p-4 text-white shadow-xl"
+              class="backface-hidden back relative size-full rounded-3xl border-4 bg-slate-900 p-4 text-white shadow-xl"
             >
               <div
-                v-if="concerts[focus.index].program"
-                class="mb-4 flex h-full flex-col gap-8"
+                class="absolute right-4 top-4 z-20 flex size-12 cursor-pointer flex-col items-center justify-center text-5xl hover:text-gray-300"
               >
-                <h2 class="lilita-one-regular mt-8 text-5xl">Programme</h2>
-                <ul class="raleway flex grow flex-col">
-                  <div
-                    v-for="program in concerts[focus.index].program"
-                    :key="program.name"
-                    class="my-3"
-                  >
-                    <p class="text-3xl">{{ program.name }}</p>
-                    <p v-if="program.direction">
-                      Dirigé par {{ program.direction }}
-                    </p>
-                  </div>
-                </ul>
+                <Icon name="ic:cancel" />
               </div>
-              <div v-else class="flex h-full flex-col justify-center">
-                <h2 class="lilita-one-regular text-4xl sm:text-5xl">
-                  Programme à venir...
-                </h2>
+              <div
+                class="no-scrollbar flex size-full grow flex-col overflow-auto"
+              >
+                <div
+                  v-if="concerts[focus.index].program"
+                  class="mb-4 flex h-full flex-col gap-8"
+                >
+                  <h2 class="lilita-one-regular mt-8 text-5xl">Programme</h2>
+                  <ul class="raleway flex grow flex-col">
+                    <div
+                      v-for="program in concerts[focus.index].program"
+                      :key="program.name"
+                      class="my-3"
+                    >
+                      <p class="text-3xl">{{ program.name }}</p>
+                      <p v-if="program.direction">
+                        Dirigé par {{ program.direction }}
+                      </p>
+                    </div>
+                  </ul>
+                </div>
+                <div v-else class="flex h-full flex-col justify-center">
+                  <h2 class="lilita-one-regular text-4xl sm:text-5xl">
+                    Programme à venir...
+                  </h2>
+                </div>
               </div>
             </div>
           </div>

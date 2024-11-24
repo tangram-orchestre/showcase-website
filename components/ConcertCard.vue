@@ -10,14 +10,21 @@ defineProps<{
   <div
     class="flex flex-col rounded-3xl bg-slate-900 p-4 text-center text-white shadow-xl"
   >
-    <NuxtPicture
-      :src="concert.image"
-      :alt="`${concert.date} - ${concert.location}`"
-      class="aspect-video"
-      quality="70"
-      sizes="90vw sm:45vw lg:30vw xl:25vw"
-      :img-attrs="{ class: 'aspect-video rounded-2xl border-2 w-full' }"
-    />
+    <div class="relative">
+      <div
+        class="absolute right-3 top-3 z-20 flex size-12 flex-col items-center justify-center rounded-full bg-slate-900/80 text-4xl hover:opacity-90"
+      >
+        <Icon name="ic:round-plus" />
+      </div>
+      <NuxtPicture
+        :src="concert.image"
+        :alt="`${concert.date} - ${concert.location}`"
+        class="aspect-video"
+        quality="70"
+        sizes="90vw sm:45vw lg:30vw xl:25vw"
+        :img-attrs="{ class: 'aspect-video rounded-2xl border-2 w-full' }"
+      />
+    </div>
     <div class="flex grow flex-col justify-center">
       <div class="py-4">
         <div
