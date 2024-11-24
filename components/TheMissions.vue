@@ -1,21 +1,36 @@
 <script setup lang="ts">
 const currentImageIndex = ref(0);
+const firstIteration = ref(true);
+
 const carrousel = (list: string[]) => {
   function mod(n: number, m: number) {
     return ((n % m) + m) % m;
   }
 
-  const newLocal = [
-    list[mod(currentImageIndex.value - 1, list.length)],
-    list[mod(currentImageIndex.value, list.length)],
-    list[mod(currentImageIndex.value + 1, list.length)],
-  ];
-  return newLocal;
+  const arr = [];
+
+  if (!firstIteration.value) {
+    arr.push({
+      path: list[mod(currentImageIndex.value - 1, list.length)],
+      isMain: false,
+    });
+  }
+  arr.push({
+    path: list[mod(currentImageIndex.value, list.length)],
+    isMain: true,
+  });
+  arr.push({
+    path: list[mod(currentImageIndex.value + 1, list.length)],
+    isMain: false,
+  });
+
+  return arr;
 };
 
 onMounted(() => {
   useIntervalFn(() => {
     currentImageIndex.value++;
+    firstIteration.value = false;
   }, 8000);
 });
 
@@ -95,12 +110,10 @@ const missions = [
           class="image-shadow relative aspect-video w-full rounded-2xl border-[#ffffff8f]"
         >
           <NuxtPicture
-            v-for="(image, imageIndex) in carrousel(mission.images)"
-            :key="image"
-            :src="image"
-            :class="
-              imageIndex == 1 ? 'z-10 opacity-100' : 'z-0 opacity-0 delay-1000'
-            "
+            v-for="{ path, isMain } in carrousel(mission.images)"
+            :key="path"
+            :src="path"
+            :class="isMain ? 'z-10 opacity-100' : 'z-0 opacity-0 delay-1000'"
             class="aspect-video transition-opacity duration-1000"
             :img-attrs="{
               class:
