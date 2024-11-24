@@ -14,19 +14,6 @@ useSeoMeta({
   ogImage: "http://www.tangram-orchestre.fr/images/partoches.jpg",
   twitterCard: "summary_large_image",
 });
-
-const animate = ref(false);
-const animationShowed = useSessionStorage("animation-showed", false, {
-  initOnMounted: true,
-});
-
-onMounted(() => {
-  animate.value = true;
-
-  setTimeout(() => {
-    animationShowed.value = true;
-  }, 4000);
-});
 </script>
 
 <template>
@@ -40,10 +27,7 @@ onMounted(() => {
     TANGRAM
   </div>
 
-  <div
-    :class="{ animate, 'skip-animation': animationShowed }"
-    class="min-h-screen overflow-hidden"
-  >
+  <div class="animate min-h-screen overflow-hidden">
     <div
       class="heading mx-auto mb-20 mt-40 grid max-w-4xl justify-items-center ease-in-out"
     >
@@ -119,10 +103,6 @@ $animate-in-main-duration: 1000ms;
       animation: grid-animation $animate-in-title-duration ease-in-out
         $animate-in-title-time forwards;
     }
-    .skip-animation & {
-      animation-delay: 0ms;
-      animation-duration: 500ms;
-    }
   }
 }
 
@@ -132,10 +112,6 @@ $animate-in-main-duration: 1000ms;
     animation: opacity-animation $animate-in-title-duration ease-in-out
       $animate-in-title-time forwards;
   }
-  .skip-animation & {
-    animation-delay: 0ms;
-    animation-duration: 500ms;
-  }
 }
 
 main {
@@ -143,10 +119,6 @@ main {
   .animate & {
     animation: opacity-animation $animate-in-main-duration ease-in-out
       $animate-in-main-time forwards;
-  }
-  .skip-animation & {
-    animation-delay: 0ms;
-    animation-duration: 500ms;
   }
 }
 </style>
