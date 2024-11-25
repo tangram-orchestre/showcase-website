@@ -1,13 +1,10 @@
+import TheNavBar from './TheNavBar.vue'
 <template>
   <Head>
     <Title>Tangram Orchestre</Title>
   </Head>
 
-  <div
-    class="roboto-light fixed top-0 z-30 w-full bg-white p-4 text-center text-3xl text-gray-800 shadow-xl"
-  >
-    TANGRAM
-  </div>
+  <NavBarTop />
 
   <div class="animate min-h-screen overflow-hidden">
     <div
@@ -33,10 +30,12 @@
     </div>
 
     <main>
-      <TheMissions />
-      <TheConcerts />
-      <TheLinks />
-      <TheCagnotte />
+      <NavBarSections>
+        <TheMissions />
+        <TheConcerts />
+        <TheLinks />
+        <TheCagnotte />
+      </NavBarSections>
     </main>
 
     <TheFooter />
