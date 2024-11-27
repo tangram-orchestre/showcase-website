@@ -7,7 +7,7 @@ useHead({
 
 useSeoMeta({
   title: "Tangram Orchestre",
-  ogTitle: "My Amazing Site",
+  ogTitle: "Tangram Orchestre",
   ogUrl: "https://www.tangram-orchestre.fr",
   description: "Orchestre amateur pour Chef⸱fe⸱s en herbe",
   ogDescription: "Orchestre amateur pour Chef⸱fe⸱s en herbe",
