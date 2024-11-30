@@ -376,20 +376,24 @@ const concerts: Array<Concert> = [
   }
 }
 
-$animate-time: 700ms;
+$enter-animate-time: 600ms;
+$leave-animate-time: 400ms;
 $flip-ratio: 0.7;
-$flip-time: $animate-time * $flip-ratio;
-$flip-reverse-delay: $animate-time - $flip-time;
+$enter-flip-time: $enter-animate-time * $flip-ratio;
+$leave-flip-time: $leave-animate-time * $flip-ratio;
+$flip-reverse-delay: $leave-animate-time - $leave-flip-time;
 
-.focus-enter-active,
+.focus-enter-active {
+  transition: all $enter-animate-time ease-in-out;
+}
 .focus-leave-active {
-  transition: all $animate-time ease-in-out;
+  transition: all $leave-animate-time ease-in-out;
 }
 .focus-enter-active.focused-container .focused-container-inner {
-  transition: all $flip-time ease-in-out;
+  transition: all $enter-flip-time ease-in-out;
 }
 .focus-leave-active.focused-container .focused-container-inner {
-  transition: all $flip-time $flip-reverse-delay ease-in-out;
+  transition: all $leave-flip-time $flip-reverse-delay ease-in-out;
 }
 
 .focus-enter-from,
@@ -410,14 +414,17 @@ $flip-reverse-delay: $animate-time - $flip-time;
   bottom: 0;
   left: 0;
   backdrop-filter: blur(5px);
-  transition: all $animate-time;
 
   &.v-leave-active {
     pointer-events: none;
   }
 
-  &.v-enter-from,
+  &.v-enter-from {
+    transition: all $enter-animate-time;
+    backdrop-filter: blur(0);
+  }
   &.v-leave-to {
+    transition: all $leave-animate-time;
     backdrop-filter: blur(0);
   }
 }
